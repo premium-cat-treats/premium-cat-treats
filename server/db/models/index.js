@@ -1,6 +1,6 @@
 const User = require('./user')
-const {Product} = require('./product.js')
-const {Category} = require('./category.js')
+const Product = require('./product.js')
+const Category = require('./category.js')
 const db = require('../db')
 
 /**
@@ -9,8 +9,8 @@ const db = require('../db')
  *
  *    BlogPost.belongsTo(User)
  */
-Product.belongsToMany(Category)
-Category.belongsToMany(Product)
+Product.belongsToMany(Category, {through: 'Product-Category'})
+Category.belongsToMany(Product, {through: 'Product-Category'})
 
 /**
  * We'll export all of our models here, so that any time a module needs a model,
