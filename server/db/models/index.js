@@ -9,8 +9,8 @@ const db = require('../db')
  *
  *    BlogPost.belongsTo(User)
  */
-Product.belongsToMany(Category, {through: 'Product-Category'})
-Category.belongsToMany(Product, {through: 'Product-Category'})
+Product.belongsToMany(Category, {through: 'product_category'})
+Category.belongsToMany(Product, {through: 'product_category'})
 
 /**
  * We'll export all of our models here, so that any time a module needs a model,
