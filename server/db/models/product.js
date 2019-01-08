@@ -10,8 +10,8 @@ const Product = db.define('product', {
   description: {
     type: Sequelize.TEXT
   },
-  price: {
-    type: Sequelize.DECIMAL(10, 2),
+  priceCents: {
+    type: Sequelize.INTEGER,
     allowNull: false,
     validate: {
       min: 0
@@ -19,15 +19,11 @@ const Product = db.define('product', {
   },
   quantity: {
     type: Sequelize.INTEGER,
-    allowNull: false,
-    validate: {
-      min: 0
-    }
+    allowNull: false
   },
   imageUrl: {
     type: Sequelize.STRING,
-    defaultValue:
-      'https://i.pinimg.com/originals/2d/94/33/2d94334b737efb5d3a5ef32aef9daefc.jpg'
+    defaultValue: 'premium_cat_treats.png'
   }
 })
 
