@@ -1,5 +1,6 @@
 body {
   font-family: sans-serif;
+  font-family: 'Karla', sans-serif;
 }
 
 a {
@@ -10,12 +11,38 @@ label {
   display: block;
 }
 
-nav a {
-  display: inline-block;
-  margin: 1em;
+.Auth-form {
+  margin-top: 100px;
+  font-family: 'Karla', sans-serif;
 }
 
 form div {
   margin: 1em;
   display: inline-block;
+}
+
+.Navbar {
+  height: 70px;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: linear-gradient(#00ffff, #7fffd4);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+  box-sizing: border-box;
+  z-index: 90;
+}
+
+.Navbar h3 {
+  font-size: 1.5em;
+  font-kerning: normal;
+  letter-spacing: 1px;
+}
+
+nav a {
+  display: inline-block;
+  margin: 1em;
 }
