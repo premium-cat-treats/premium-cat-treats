@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 
 class AllProducts extends Component {
   componentDidMount() {
-    // Uncomment line below when we have a thunk imported from the store named fetchProducts.
+    // TODO: Uncomment line below when we have a thunk imported from the store named fetchProducts.
     // this.props.fetchProducts();
   }
 
@@ -12,11 +12,7 @@ class AllProducts extends Component {
 
     return (
       <div>
-        {products ? (
-          <div>Will map over all the products here.</div>
-        ) : (
-          <div>No products in database.</div>
-        )}
+        {products ? <div>{products}</div> : <div>No products in database.</div>}
       </div>
     )
   }
