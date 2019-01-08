@@ -2,9 +2,9 @@ const router = require('express').Router()
 const Category = require('../db/models/category')
 module.exports = router
 
-router.get('/:id', async (req, res, next) => {
+router.get('/:id/products', async (req, res, next) => {
   try {
-    const filteredProducts = await Category.getProducts(req.params.id)
+    const filteredProducts = await Category.getWithProducts(req.params.id)
     res.send(filteredProducts)
   } catch (error) {
     next(error)
@@ -23,7 +23,7 @@ router.post('/', async (req, res, next) => {
 
 router.delete('/:id', async (req, res, next) => {
   try {
-    await Category.destroy(req.body, {
+    await Category.destroy({
       where: {
         id: req.params.id
       }
@@ -36,12 +36,13 @@ router.delete('/:id', async (req, res, next) => {
 
 router.put('/:id', async (req, res, next) => {
   try {
-    const updatedProduct = await Category.update(req.body, {
+    await Category.update(req.body, {
       where: {
         id: req.params.id
       }
     })
-    res.status(201).send(updatedProduct)
+    const updatedCategory = await Category.findById(req.params.id)
+    res.status(201).send(updatedCategory)
   } catch (error) {
     next(error)
   }

@@ -32,11 +32,12 @@ router.post('/', async (req, res, next) => {
 
 router.put('/:id', async (req, res, next) => {
   try {
-    const updatedProduct = await Product.update(req.body, {
+    await Product.update(req.body, {
       where: {
         id: req.params.id
       }
     })
+    const updatedProduct = await Product.findById(req.params.id)
     res.status(201).send(updatedProduct)
   } catch (error) {
     next(error)

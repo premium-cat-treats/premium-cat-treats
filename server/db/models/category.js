@@ -10,7 +10,7 @@ const Category = db.define('category', {
   }
 })
 
-Category.getProducts = async id => {
+Category.getWithProducts = async id => {
   const categories = await Category.findById(id, {
     include: [
       {
