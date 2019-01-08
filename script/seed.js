@@ -17,14 +17,14 @@ async function seed() {
       title: 'Shepards Pie',
       description:
         'Give your cat a trip to the English country side with minced red meat, cooked in a gravy with onions, vegetables, and topped with catnip',
-      priceCents: 2.99,
+      priceCents: 299,
       quantity: 50
     }),
     Product.create({
       title: 'Vegan Kitty Korma',
       description:
         'Low fat, traditional Indian dish that’s light and flavorful almond curry made with tomato paste, plenty of spices and cream thats buttery and completely purrrrfect',
-      priceCents: 5.99,
+      priceCents: 599,
       quantity: 50
     })
   ])
