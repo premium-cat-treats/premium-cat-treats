@@ -1,6 +1,16 @@
 const router = require('express').Router()
 const Category = require('../db/models/category')
+const Product = require('../db/models/product')
 module.exports = router
+
+router.get('/', async (req, res, next) => {
+  try {
+    const categories = await Category.findAll({include: [{model: Product}]})
+    res.send(categories)
+  } catch (error) {
+    next(error)
+  }
+})
 
 router.get('/:id/products', async (req, res, next) => {
   try {

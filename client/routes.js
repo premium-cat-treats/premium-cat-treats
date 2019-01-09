@@ -5,6 +5,8 @@ import PropTypes from 'prop-types'
 import {Login, Signup, UserHome} from './components'
 import {me} from './store'
 import ManageableProduct from './components/manageableProduct'
+import AllProducts from './components/AllProducts'
+import ProductsInCategory from './components/ProductsInCategory'
 
 /**
  * COMPONENT
@@ -25,6 +27,8 @@ class Routes extends Component {
           path="/products/admin/:productId"
           component={ManageableProduct}
         />
+        <Route exact path="/" component={AllProducts} />
+        <Route path="/products/:categoryId" component={ProductsInCategory} />
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
         {isLoggedIn && (
