@@ -101,7 +101,7 @@ export const updateProductById = (newProductInfo, productId) => {
   }
 }
 
-export const productsReducer = (state = [], action) => {
+export const products = (state = [], action) => {
   switch (action.type) {
     case GOT_PRODUCTS:
       return action.products
@@ -127,10 +127,10 @@ export const productsReducer = (state = [], action) => {
   }
 }
 
-export const currentProductReducer = (state = {}, action) => {
+export const currentProduct = (state = {}, action) => {
   switch (action.type) {
     case GOT_PRODUCT_INFO:
-      return action.product
+      return action.productInfo
     case GOT_UPDATED_PRODUCT:
       return action.updatedProduct
     default:

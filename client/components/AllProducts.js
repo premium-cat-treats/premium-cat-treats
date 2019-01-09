@@ -17,7 +17,7 @@ class AllProducts extends Component {
           <div>
             <h2>Products Available</h2>
             {products.map(product => {
-              return <Product key={product.key} product={product} />
+              return <Product key={product.id} product={product} />
             })}
           </div>
         ) : (
@@ -29,7 +29,7 @@ class AllProducts extends Component {
 }
 
 const mapStateToProps = state => ({
-  products: state.productsReducer,
+  products: state.products,
   user: state.user
 })
 

@@ -14,34 +14,32 @@ class ProductForm extends Component {
     }
   }
 
-  componentDidMount() {
-    if (this.props.product) {
-      const {
-        title,
-        description,
-        priceCents,
-        quantity,
-        imageUrl
-      } = this.props.product
-      this.setState({
-        title,
-        description,
-        priceCents,
-        quantity,
-        imageUrl
-      })
-    }
-  }
+  // componentDidUpdate() {
+  //     const {
+  //       title,
+  //       description,
+  //       priceCents,
+  //       quantity,
+  //       imageUrl
+  //     } = this.props.product
+  //     this.setState({
+  //       title,
+  //       description,
+  //       priceCents,
+  //       quantity,
+  //       imageUrl
+  //     })
+  // }
 
   handleSubmit = event => {
     event.preventDefault()
-    if (this.props.product) {
+    if (this.props.product.id) {
       this.props.updateProduct(this.state, this.props.product.id)
-      alert('Product Submitted Purrfectly!')
+      alert('Product Edit Purrfectly!')
       //reroute to AllProducts
     } else {
       this.props.postProduct(this.state)
-      //reroute to AllProducts
+      alert('Product Submitted Purrfectly!')
     }
   }
 
@@ -52,6 +50,7 @@ class ProductForm extends Component {
   }
 
   render() {
+    console.log(this.state)
     return (
       <div className="form">
         <form onSubmit={this.handleSubmit}>
@@ -63,42 +62,7 @@ class ProductForm extends Component {
                 onChange={this.handleChange}
                 type="text"
                 name="title"
-                placeholder="Title"
                 required
-              />
-            </div>
-
-            <div>
-              <label>Description:</label> <br />
-              <input
-                value={this.state.priceCents}
-                onChange={this.handleChange}
-                type="number"
-                name="price"
-                placeholder="Product Price"
-                required
-              />
-            </div>
-            <div>
-              <label>Quantity:</label> <br />
-              <input
-                value={this.state.priceCents}
-                onChange={this.handleChange}
-                type="number"
-                name="quantity"
-                placeholder="Quantity"
-                required
-              />
-            </div>
-
-            <div>
-              <label>Description:</label> <br />
-              <textarea
-                value={this.state.description}
-                onChange={this.handleChange}
-                type="text"
-                name="description"
-                placeholder="Decribe the product"
               />
             </div>
 
@@ -112,6 +76,38 @@ class ProductForm extends Component {
               />
             </div>
 
+            <div>
+              <label>Price:</label> <br />
+              <input
+                value={(this.state.priceCents / 100).toFixed(2)}
+                onChange={this.handleChange}
+                type="number"
+                name="price"
+                required
+              />
+            </div>
+            <div>
+              <label>Quantity:</label> <br />
+              <input
+                value={this.state.quantity}
+                onChange={this.handleChange}
+                type="number"
+                name="quantity"
+                required
+              />
+            </div>
+
+            <div>
+              <label>Description:</label> <br />
+              <textarea
+                value={this.state.description}
+                onChange={this.handleChange}
+                type="text"
+                name="description"
+              />
+            </div>
+
+            <br />
             <button type="submit">Submit Product Info</button>
           </div>
         </form>
