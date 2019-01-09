@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {fetchProducts} from '../store/product'
-import {Link} from 'react-router-dom'
+import Product from './Product'
 
 class AllProducts extends Component {
   componentDidMount() {
@@ -17,14 +17,7 @@ class AllProducts extends Component {
           <div>
             <h2>Products Available</h2>
             {products.map(product => {
-              return (
-                <div key={product.id}>
-                  <h3>{product.title}</h3>{' '}
-                  <p>Price: ${product.priceCents / 100}</p>
-                  <p>Description: {product.description}</p>
-                  {/* {this.props.user.adminAccess ? <Link to= add route here>Edit this product</Link>} */}
-                </div>
-              )
+              return <Product key={product.key} product={product} />
             })}
           </div>
         ) : (
