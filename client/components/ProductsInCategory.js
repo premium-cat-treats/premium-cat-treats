@@ -9,7 +9,6 @@ class ProductsInCategory extends Component {
   }
 
   render() {
-    console.log(this.props)
     const {products, categories} = this.props
     // Grabs categoryId from parameter in URL
     const categoryId = Number(this.props.match.params.categoryId)
