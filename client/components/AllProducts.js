@@ -29,7 +29,8 @@ class AllProducts extends Component {
 }
 
 const mapStateToProps = state => ({
-  products: state.productsReducer
+  products: state.productsReducer,
+  user: state.user
 })
 
 const mapDispatchToProps = dispatch => ({
