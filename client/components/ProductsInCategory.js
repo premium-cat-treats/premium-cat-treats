@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {fetchProducts} from '../store/product'
-import Product from './Product'
+import ProductsList from './ProductsList'
 
 class ProductsInCategory extends Component {
   componentDidMount() {
@@ -14,18 +14,17 @@ class ProductsInCategory extends Component {
     const selectedCategory = categories.filter(
       category => category.id === categoryId
     )
+    const filteredProducts = products.filter(product => {
+      return product.categories.some(category => category.id === categoryId)
+    })
+    console.log('filtered: ', filteredProducts)
 
     return (
       <div>
         {products.length ? (
           <div>
             <h2>{selectedCategory[0].title}</h2>
-            {products
-              // Will only properly filter if each product only belongs to one category
-              .filter(product => product.categories[0].id === categoryId)
-              .map(product => {
-                return <Product key={product.id} product={product} />
-              })}
+            <ProductsList products={filteredProducts} />
           </div>
         ) : (
           <div>No products in database.</div>
