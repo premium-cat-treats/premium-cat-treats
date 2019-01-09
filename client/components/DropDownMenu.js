@@ -20,7 +20,9 @@ class DropDownMenu extends Component {
     return (
       <div>
         <select name="categories" onChange={this.handleChange}>
-          <option>Select Category</option>
+          <option selected="true" disabled="disabled" value="">
+            Select a Category
+          </option>
           {categories ? (
             categories.map(category => {
               return (
