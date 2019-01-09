@@ -9,6 +9,7 @@ class ProductsInCategory extends Component {
   }
 
   render() {
+    console.log(this.props)
     const {products, categories} = this.props
     // Grabs categoryId from parameter in URL
     const categoryId = Number(this.props.match.params.categoryId)
@@ -37,7 +38,7 @@ class ProductsInCategory extends Component {
 }
 
 const mapStateToProps = state => ({
-  products: state.productsReducer,
+  products: state.products,
   categories: state.categories
 })
 
