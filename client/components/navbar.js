@@ -3,10 +3,14 @@ import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {logout} from '../store'
+import DropDownMenu from './DropDownMenu'
 
 const Navbar = ({handleClick, isLoggedIn}) => (
   <div className="navbar">
-    <h3>PREMIUM CAT TREATS</h3>
+    <Link to="/">
+      <h2>PREMIUM CAT TREATS</h2>
+    </Link>
+    <DropDownMenu />
     <nav>
       {isLoggedIn ? (
         <div>
