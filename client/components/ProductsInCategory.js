@@ -10,20 +10,22 @@ class ProductsInCategory extends Component {
 
   render() {
     const {products, categories} = this.props
+    // Grabs categoryId from parameter in URL
     const categoryId = Number(this.props.match.params.categoryId)
+    // Finds category associated with id from URL
     const selectedCategory = categories.filter(
       category => category.id === categoryId
-    )
+    )[0]
+    // Finds the products from associated category
     const filteredProducts = products.filter(product => {
       return product.categories.some(category => category.id === categoryId)
     })
-    console.log('filtered: ', filteredProducts)
 
     return (
       <div>
         {products.length ? (
           <div>
-            <h2>{selectedCategory[0].title}</h2>
+            <h2>{selectedCategory.title}</h2>
             <ProductsList products={filteredProducts} />
           </div>
         ) : (
