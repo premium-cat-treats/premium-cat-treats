@@ -21,7 +21,7 @@ form div {
   display: inline-block;
 }
 
-.Navbar {
+.navbar {
   height: 70px;
   width: 100%;
   position: fixed;
@@ -36,7 +36,7 @@ form div {
   z-index: 90;
 }
 
-.Navbar h3 {
+.navbar h3 {
   font-size: 1.5em;
   font-kerning: normal;
   letter-spacing: 1px;
@@ -45,4 +45,10 @@ form div {
 nav a {
   display: inline-block;
   margin: 1em;
+}
+
+.single-admin-product {
+  width: 400px;
+  height: 500px;
+  display: inline-block;
 }

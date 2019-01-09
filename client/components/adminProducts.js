@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import ManageableProduct from './manageableProduct'
 import {fetchProducts, deleteProductById} from '../store/product'
-
+//TODO: show conditionally in navbar
 class AdminProducts extends Component {
   constructor(props) {
     super(props)

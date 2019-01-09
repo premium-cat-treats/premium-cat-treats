@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {fetchProducts} from '../store/product'
+import {Link} from 'react-router-dom'
 
 class AllProducts extends Component {
   componentDidMount() {
@@ -21,6 +22,7 @@ class AllProducts extends Component {
                   <h3>{product.title}</h3>{' '}
                   <p>Price: ${product.priceCents / 100}</p>
                   <p>Description: {product.description}</p>
+                  {/* {this.props.user.adminAccess ? <Link to= add route here>Edit this product</Link>} */}
                 </div>
               )
             })}
@@ -34,7 +36,8 @@ class AllProducts extends Component {
 }
 
 const mapStateToProps = state => ({
-  products: state.productsReducer
+  products: state.productsReducer,
+  user: state.user
 })
 
 const mapDispatchToProps = dispatch => ({

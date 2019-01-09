@@ -38,8 +38,10 @@ class ProductForm extends Component {
     if (this.props.product) {
       this.props.updateProduct(this.state, this.props.product.id)
       alert('Product Submitted Purrfectly!')
+      //reroute to AllProducts
     } else {
       this.props.postProduct(this.state)
+      //reroute to AllProducts
     }
   }
 
