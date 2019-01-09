@@ -1,17 +1,17 @@
 import React, {Component} from 'react'
 import {fetchCategories} from '../store/category'
 import {connect} from 'react-redux'
-// import {Link} from 'react-router-dom'
+import {withRouter} from 'react-router-dom'
 
 class DropDownMenu extends Component {
   componentDidMount() {
     this.props.fetchCategories()
   }
 
-  handleChange(event) {
+  handleChange = event => {
     const value = Number(event.target.value)
-    // If the value is valid, need to redirect URL to /product/:value Route
-    if (value) console.log({value})
+
+    this.props.history.push(`/products/${value}`)
   }
 
   render() {
@@ -48,4 +48,6 @@ const mapDispatchToProps = dispatch => ({
   fetchCategories: () => dispatch(fetchCategories())
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(DropDownMenu)
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(DropDownMenu)
+)
