@@ -15,9 +15,9 @@ class AllProducts extends Component {
       <div>
         {products.length ? (
           <div>
-            <h2>Products Available</h2>
+            <h2>All Products</h2>
             {products.map(product => {
-              return <Product key={product.key} product={product} />
+              return <Product key={product.id} product={product} />
             })}
           </div>
         ) : (
