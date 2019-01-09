@@ -3,47 +3,51 @@ import {postNewProduct, updateProductById} from '../store/product'
 import {connect} from 'react-redux'
 
 class ProductForm extends Component {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
     this.state = {
-      title: '',
-      description: '',
-      priceCents: 0,
-      quantity: 0,
-      imageUrl: ''
+      title: this.props.product.title,
+      description: this.props.product.description,
+      priceCents: (
+        parseInt(this.props.product.priceCents, 10) / 100
+      ).toString(),
+      quantity: this.props.product.quantity.toString(),
+      imageUrl: this.props.product.imageUrl
     }
   }
-
-  // componentDidUpdate() {
-  //     const {
-  //       title,
-  //       description,
-  //       priceCents,
-  //       quantity,
-  //       imageUrl
-  //     } = this.props.product
-  //     this.setState({
-  //       title,
-  //       description,
-  //       priceCents,
-  //       quantity,
-  //       imageUrl
-  //     })
-  // }
 
   handleSubmit = event => {
     event.preventDefault()
-    if (this.props.product.id) {
-      this.props.updateProduct(this.state, this.props.product.id)
-      alert('Product Edit Purrfectly!')
-      //reroute to AllProducts
+    let price = this.state.priceCents
+    if (!price.includes('.')) {
+      price = price + '00'
+    }
+    let newPrice = ''
+    for (let i = 0; i < price.length; i++) {
+      if (price[i] !== '.' && price[i] !== ',') {
+        newPrice += price[i]
+      }
+    }
+    newPrice = parseInt(newPrice, 10)
+    console.log(newPrice)
+    let newQuantity = parseInt(this.state.quantity, 10)
+    console.log(newQuantity)
+    if (!isNaN(newPrice) && !isNaN(newQuantity)) {
+      const updateObject = {
+        title: this.state.title,
+        description: this.state.description,
+        quantity: newQuantity,
+        priceCents: newPrice,
+        imageUrl: this.state.imageUrl
+      }
+      this.props.updateProduct(updateObject, this.props.product.id)
+      alert('Product Edit Successful!')
     } else {
-      this.props.postProduct(this.state)
-      alert('Product Submitted Purrfectly!')
+      alert('Quantity and price must be valid numbers')
     }
   }
 
-  handleChange = () => {
+  handleChange = event => {
     this.setState({
       [event.target.name]: event.target.value
     })
@@ -71,18 +75,19 @@ class ProductForm extends Component {
               <input
                 onChange={this.handleChange}
                 value={this.state.imageUrl}
-                type="url"
+                type="text"
                 name="imageUrl"
+                placeholder="Image url here..."
               />
             </div>
 
             <div>
               <label>Price:</label> <br />
               <input
-                value={(this.state.priceCents / 100).toFixed(2)}
+                value={this.state.priceCents}
                 onChange={this.handleChange}
-                type="number"
-                name="price"
+                type="text"
+                name="priceCents"
                 required
               />
             </div>
@@ -91,7 +96,7 @@ class ProductForm extends Component {
               <input
                 value={this.state.quantity}
                 onChange={this.handleChange}
-                type="number"
+                type="text"
                 name="quantity"
                 required
               />

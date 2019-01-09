@@ -13,7 +13,7 @@ class ManageableProduct extends Component {
     this.props.fetchSingleProduct(this.props.match.params.productId)
   }
 
-  deleteProduct() {
+  deleteProduct(id) {
     this.props.deleteProduct(id)
     this.props.history.push('/products')
   }
@@ -23,15 +23,19 @@ class ManageableProduct extends Component {
       <div className="single-admin-product">
         {this.props.product.id ? (
           <div>
-            <h3>{this.props.product.title}</h3>
-            <img src={this.props.product.imageUrl} />
-            <h4>{this.props.product.priceCents / 100}</h4>
-            <h4>{this.props.product.quantity}</h4>
-            <p>{this.props.product.description}</p>
+            <div>
+              <h3>{this.props.product.title}</h3>
+              <img src={this.props.product.imageUrl} />
+              <h4>{this.props.product.priceCents / 100}</h4>
+              <h4>{this.props.product.quantity}</h4>
+              <p>{this.props.product.description}</p>
+            </div>
+            <button onClick={() => this.deleteProduct(this.props.product.id)}>
+              Delete this Product
+            </button>
+            <ProductForm product={this.props.product} />
           </div>
         ) : null}
-        <button onClick={this.deleteProduct}>Delete this Product</button>
-        <ProductForm product={this.props.product} />
       </div>
     )
   }
