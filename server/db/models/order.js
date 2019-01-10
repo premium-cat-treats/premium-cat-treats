@@ -1,23 +1,14 @@
-// const Sequelize = require('sequelize')
-// const db = require('../db')
+const Sequelize = require('sequelize')
+const db = require('../db')
 
-// const Order = db.define('order', {
-//   title: {
-//     type: Sequelize.STRING,
-//     unique: true,
-//     allowNull: false
-//   },
-//   total: {
-//     type: Sequelize.INTEGER,
-//     allowNull: false,
-//     validate: {
-//       min: 0
-//     }
-//   }
-// })
+const Order = db.define('order', {
+  status: {
+    type: Sequelize.STRING,
+    allowNull: false,
+    validate: {
+      isIn: [['Created', 'Processing', 'Canceled', 'Completed']]
+    }
+  }
+})
 
-// Order.hook('beforeCreate', function() {
-
-// })
-
-// module.exports = Order
+module.exports = Order

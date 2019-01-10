@@ -5,9 +5,9 @@
 // import Order from './order'
 
 // class OrderHistory extends Component {
-//   componentDidMount() {
-//     this.props.getUser()
-//     this.props.fetchOrders(this.props.user.id)
+//   async componentDidMount() {
+//     await this.props.getUser()
+//     await this.props.fetchOrders(this.props.user.id)
 //   }
 
 //   render() {

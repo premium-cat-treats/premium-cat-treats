@@ -1,13 +1,19 @@
 // const router = require('express').Router()
+// const Order = require('../db/models/order')
+// const User = require('../db/models/user')
 // const Product = require('../db/models/product')
-// const Category = require('../db/models/category')
 // module.exports = router
 
 // router.get('/:id', async (req, res, next) => {
-//   // try {
-//   //   const products = await Product.findAll({include: [{model: Category}]})
-//   //   res.send(products)
-//   // } catch (error) {
-//   //   next(error)
-//   // }
+//   try {
+//     const products = await Order.findAll({
+//       where: {
+//         userid: req.params.id
+//       },
+//        include: [{model: Product}]
+//     })
+//     res.send(products)
+//   } catch (error) {
+//     next(error)
+//   }
 // })
