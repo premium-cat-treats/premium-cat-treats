@@ -37,7 +37,7 @@ class ProductsInCategory extends Component {
 }
 
 const mapStateToProps = state => ({
-  products: state.productsReducer,
+  products: state.products,
   categories: state.categories
 })
 
