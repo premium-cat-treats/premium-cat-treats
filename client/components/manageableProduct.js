@@ -1,12 +1,7 @@
 import React, {Component} from 'react'
 import ProductForm from './productForm'
 import {connect} from 'react-redux'
-import {
-  updateProductById,
-  fetchSingleProduct,
-  deleteProductById
-} from '../store/product'
-import AddProductForm from './AddProducForm'
+import {updateProductById, fetchSingleProduct} from '../store/product'
 
 class ManageableProduct extends Component {
   constructor(props) {
@@ -32,7 +27,7 @@ class ManageableProduct extends Component {
   }
 
   deleteProduct = id => {
-    this.props.deleteProduct(id)
+    this.props.updateProduct({deleted: true}, id)
     this.props.history.push('/products')
   }
 
@@ -74,14 +69,6 @@ class ManageableProduct extends Component {
   }
 
   render() {
-    const {
-      title,
-      imageUrl,
-      priceCents,
-      quantity,
-      description,
-      id
-    } = this.props.product
     return (
       <div className="single-admin-product">
         {this.props.product && this.props.product.id ? (
@@ -93,7 +80,7 @@ class ManageableProduct extends Component {
               <h4>{this.props.product.quantity}</h4>
               <p>{this.props.product.description}</p>
             </div>
-            <button onClick={() => this.deleteProduct(id)}>
+            <button onClick={() => this.deleteProduct(this.props.product.id)}>
               Delete this Product
             </button>
             <ProductForm
@@ -114,7 +101,6 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   fetchSingleProduct: id => dispatch(fetchSingleProduct(id)),
-  deleteProduct: id => dispatch(deleteProductById(id)),
   updateProduct: (productInfo, id) =>
     dispatch(updateProductById(productInfo, id))
 })
