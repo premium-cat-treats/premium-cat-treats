@@ -20,6 +20,8 @@ class Product extends Component {
   createOptions = x => {
     let options = []
 
+    // I think putting React tags in here is causing the
+    // eslint errors.
     for (let i = 1; i <= x; i++) {
       options.push(
         <option key={i} value={`${i}`}>
@@ -33,7 +35,6 @@ class Product extends Component {
 
   render() {
     const {title, priceCents, quantity, description, id} = this.props.product
-    // console.log(this.createOptions(5))
 
     return (
       <div>
@@ -46,9 +47,6 @@ class Product extends Component {
         <div>
           <select ref={`${id}-quantity-drop-down`} defaultValue="1">
             {this.createOptions(quantity)}
-            {/* <option key={1} value={1}>
-              {1}
-            </option> */}
           </select>
           <button
             type="button"
