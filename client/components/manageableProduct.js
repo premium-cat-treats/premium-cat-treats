@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import ProductForm from './productForm'
 import {connect} from 'react-redux'
 import {fetchSingleProduct, deleteProductById} from '../store/product'
+import AddProductForm from './AddProducForm'
 
 class ManageableProduct extends Component {
   constructor(props) {
@@ -19,18 +20,26 @@ class ManageableProduct extends Component {
   }
 
   render() {
+    const {
+      title,
+      imageUrl,
+      priceCents,
+      quantity,
+      description,
+      id
+    } = this.props.product
     return (
       <div className="single-admin-product">
-        {this.props.product.id ? (
+        {id ? (
           <div>
             <div>
-              <h3>{this.props.product.title}</h3>
-              <img src={this.props.product.imageUrl} />
-              <h4>{this.props.product.priceCents / 100}</h4>
-              <h4>{this.props.product.quantity}</h4>
-              <p>{this.props.product.description}</p>
+              <h3>{title}</h3>
+              <img src={imageUrl} />
+              <h4>{priceCents / 100}</h4>
+              <h4>{quantity}</h4>
+              <p>{description}</p>
             </div>
-            <button onClick={() => this.deleteProduct(this.props.product.id)}>
+            <button onClick={() => this.deleteProduct(id)}>
               Delete this Product
             </button>
             <ProductForm product={this.props.product} />

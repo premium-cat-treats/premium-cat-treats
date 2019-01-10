@@ -7,6 +7,7 @@ import {me} from './store'
 import ManageableProduct from './components/manageableProduct'
 import AllProducts from './components/AllProducts'
 import ProductsInCategory from './components/ProductsInCategory'
+import AdminDashboard from './components/AdminDashboard'
 
 /**
  * COMPONENT
@@ -33,8 +34,9 @@ class Routes extends Component {
         <Route path="/signup" component={Signup} />
         {isLoggedIn && (
           <Switch>
+            <Route exact path="/admin" component={AdminDashboard} />
             {/* Routes placed here are only available after logging in */}
-            <Route path="/home" component={UserHome} />
+            <Route exact path="/home" component={AllProducts} />
           </Switch>
         )}
         {/* Displays our Login component as a fallback */}

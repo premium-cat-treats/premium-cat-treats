@@ -15,7 +15,11 @@ class AllProducts extends Component {
       <div>
         {products.length ? (
           <div>
-            <h2>All Products</h2>
+            <br />
+            <br />
+            <br />
+            <br />
+
             <ProductsList products={products} />
           </div>
         ) : (
