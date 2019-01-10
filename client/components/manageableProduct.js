@@ -6,6 +6,7 @@ import {
   fetchSingleProduct,
   deleteProductById
 } from '../store/product'
+import AddProductForm from './AddProducForm'
 
 class ManageableProduct extends Component {
   constructor(props) {
@@ -73,6 +74,14 @@ class ManageableProduct extends Component {
   }
 
   render() {
+    const {
+      title,
+      imageUrl,
+      priceCents,
+      quantity,
+      description,
+      id
+    } = this.props.product
     return (
       <div className="single-admin-product">
         {this.props.product && this.props.product.id ? (
@@ -84,7 +93,7 @@ class ManageableProduct extends Component {
               <h4>{this.props.product.quantity}</h4>
               <p>{this.props.product.description}</p>
             </div>
-            <button onClick={() => this.deleteProduct(this.props.product.id)}>
+            <button onClick={() => this.deleteProduct(id)}>
               Delete this Product
             </button>
             <ProductForm
