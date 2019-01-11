@@ -25,8 +25,6 @@ class Product extends Component {
         {i + 1}
       </option>
     ))
-    console.log({quantityOptions})
-    console.log({options})
 
     return (
       <Card>
