@@ -1,3 +1,7 @@
-const Aux = props => props.children
+// import React from 'react'
 
-export default Aux
+// const Aux = props => {
+//   return props.children
+// }
+
+// export default Aux

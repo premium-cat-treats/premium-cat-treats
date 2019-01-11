@@ -27,6 +27,8 @@ OrderTotal.hasMany(Order)
  */
 module.exports = {
   db,
+  Order,
+  OrderTotal,
   User,
   Category,
   Product
