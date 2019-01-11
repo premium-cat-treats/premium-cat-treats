@@ -47,15 +47,12 @@ class Product extends Component {
           <Card.Description>{product.description}</Card.Description>
         </Card.Content>
         <Card.Content extra>
-            <Icon name="paw" />
+          <Icon name="paw" />
           <div>
             <select ref={`${product.id}-quantity-drop-down`} defaultValue="1">
-              {this.createOptions(quantity)}
+              {this.createOptions(product.quantity)}
             </select>
-            <button
-              type="button"
-              onClick={() => this.handleSubmit(product)}
-            >
+            <button type="button" onClick={() => this.handleSubmit(product)}>
               Add to Cart
             </button>
           </div>
