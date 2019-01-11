@@ -3,15 +3,28 @@ import {connect} from 'react-redux'
 
 class Cart extends Component {
   render() {
-    // const {cart, products} = this.props
-    console.log(this.props)
+    const {cart, products} = this.props
+    // const {title} = this.props.products[0].title
+    // console.log(this.props.products[0].title)
     return (
       <div>
-        {this.props.products.length ? (
+        <h1>Cart</h1>
+        {this.props.cart.length ? (
           <div>
-            <h1>Cart</h1>
+            {cart.map(cartItem => {
+              const [productItem] = products.filter(
+                product => product.id === cartItem.productId
+              )
+              return (
+                <p key={productItem.id}>
+                  {productItem.title} x {cartItem.quantity}
+                </p>
+              )
+            })}
           </div>
-        ) : null}
+        ) : (
+          <h2>Your Shopping Cart is empty.</h2>
+        )}
       </div>
     )
   }
