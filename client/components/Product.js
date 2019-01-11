@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import {Card, Icon, Image} from 'semantic-ui-react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {me} from '../store/user'
@@ -34,32 +35,39 @@ class Product extends Component {
   }
 
   render() {
-    const {title, priceCents, quantity, description, id} = this.props.product
-
+    const {product} = this.props
     return (
-      <div>
-        <h3>{title}</h3>
-        <p>Price: ${priceCents / 100}</p>
-        <p>Quantity in Stock: {quantity}</p>
-        <p>Description: {description}</p>
-
-        {/* Drop-down to allow user to add to cart */}
-        <div>
-          <select ref={`${id}-quantity-drop-down`} defaultValue="1">
-            {this.createOptions(quantity)}
-          </select>
-          <button
-            type="button"
-            onClick={() => this.handleSubmit(this.props.product)}
-          >
-            Add to Cart
-          </button>
-        </div>
-
-        {this.props.user.adminAccess ? (
-          <Link to={`/products/admin/${id}`}>Edit this Product</Link>
-        ) : null}
-      </div>
+      <Card>
+        <Image src={product.imageUrl} />
+        <Card.Content>
+          <Card.Header>{product.title}</Card.Header>
+          <Card.Meta>
+            <span className="price">${product.priceCents / 100}</span>
+          </Card.Meta>
+          <Card.Description>{product.description}</Card.Description>
+        </Card.Content>
+        <Card.Content extra>
+            <Icon name="paw" />
+          <div>
+            <select ref={`${product.id}-quantity-drop-down`} defaultValue="1">
+              {this.createOptions(quantity)}
+            </select>
+            <button
+              type="button"
+              onClick={() => this.handleSubmit(product)}
+            >
+              Add to Cart
+            </button>
+          </div>
+          <a>
+            {this.props.user.adminAccess ? (
+              <Link to={`/products/admin/${product.id}`}>
+                Edit this Product
+              </Link>
+            ) : null}
+          </a>
+        </Card.Content>
+      </Card>
     )
   }
 }
