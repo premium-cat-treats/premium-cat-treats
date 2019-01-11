@@ -5,7 +5,7 @@ import {List, Button} from 'semantic-ui-react'
 
 class Cart extends Component {
   render() {
-    const {cart, products} = this.props
+    const {cart} = this.props
 
     return (
       <div>
@@ -14,15 +14,8 @@ class Cart extends Component {
           <div>
             <List divided verticalAlign="middle">
               {cart.map(cartItem => {
-                const [productItem] = products.filter(
-                  product => product.id === cartItem.productId
-                )
                 return (
-                  <CartItem
-                    key={productItem.id}
-                    cartItem={cartItem}
-                    productItem={productItem}
-                  />
+                  <CartItem key={cartItem.product.id} cartItem={cartItem} />
                 )
               })}
             </List>
@@ -38,12 +31,7 @@ class Cart extends Component {
 
 const mapStateToProps = state => ({
   cart: state.cart,
-  products: state.products,
   user: state.user
 })
-
-// const mapDispatchToProps = dispatch => ({
-//   fetchProducts: () => dispatch(fetchProducts())
-// })
 
 export default connect(mapStateToProps)(Cart)

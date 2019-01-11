@@ -2,9 +2,9 @@
 const ADD_TO_CART = 'ADD_TO_CART'
 
 // ACTION CREATORS
-export const addToCart = (productId, quantity) => ({
+export const addToCart = (product, quantity) => ({
   type: ADD_TO_CART,
-  payload: {productId, quantity}
+  payload: {product, quantity}
 })
 
 export const cartReducer = (state = [], action) => {
@@ -12,9 +12,9 @@ export const cartReducer = (state = [], action) => {
     case ADD_TO_CART:
       // If the item already exists in the cart, add to
       // the quantity already associated with the productId.
-      if (state.some(item => item.productId === action.payload.productId)) {
+      if (state.some(item => item.product.id === action.payload.product.id)) {
         return state.map(item => {
-          if (item.productId === action.payload.productId) {
+          if (item.product.id === action.payload.product.id) {
             item.quantity = item.quantity + action.payload.quantity
           }
           return item

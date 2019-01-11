@@ -1,14 +1,14 @@
 import React from 'react'
 import {Button, Image, List} from 'semantic-ui-react'
 
-const CartItem = ({productItem, cartItem}) => (
+const CartItem = ({cartItem}) => (
   <List.Item>
     <List.Content floated="right">
       <Button>Delete</Button>
     </List.Content>
-    <Image avatar src={productItem.imageUrl} />
+    <Image avatar src={cartItem.product.imageUrl} />
     <List.Content>
-      {productItem.title} x {cartItem.quantity}
+      {cartItem.product.title} x {cartItem.quantity}
     </List.Content>
   </List.Item>
 )

@@ -12,7 +12,7 @@ class Product extends Component {
 
   handleSubmit = product => {
     const quantity = Number(this.refs[`${product.id}-quantity-drop-down`].value)
-    this.props.addToCart(product.id, quantity)
+    this.props.addToCart(product, quantity)
   }
 
   render() {
