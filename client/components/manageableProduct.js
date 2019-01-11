@@ -69,18 +69,26 @@ class ManageableProduct extends Component {
   }
 
   render() {
+    const {
+      id,
+      title,
+      imageUrl,
+      priceCents,
+      quantity,
+      description
+    } = this.props.product
     return (
       <div className="single-admin-product">
         {this.props.product && this.props.product.id ? (
           <div>
             <div>
-              <h3>{this.props.product.title}</h3>
-              <img src={this.props.product.imageUrl} />
-              <h4>${(this.props.product.priceCents / 100).toFixed(2)}</h4>
-              <h4>{this.props.product.quantity}</h4>
-              <p>{this.props.product.description}</p>
+              <h3>{title}</h3>
+              <img src={imageUrl} />
+              <h4>${(priceCents / 100).toFixed(2)}</h4>
+              <h4>{quantity}</h4>
+              <p>{description}</p>
             </div>
-            <button onClick={() => this.deleteProduct(this.props.product.id)}>
+            <button onClick={() => this.deleteProduct(id)}>
               Delete this Product
             </button>
             <ProductForm
