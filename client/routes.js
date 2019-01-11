@@ -8,6 +8,7 @@ import ManageableProduct from './components/manageableProduct'
 import AllProducts from './components/AllProducts'
 import ProductsInCategory from './components/ProductsInCategory'
 import AdminDashboard from './components/AdminDashboard'
+import Cart from './components/Cart'
 
 /**
  * COMPONENT
@@ -30,6 +31,7 @@ class Routes extends Component {
         />
         <Route exact path="/" component={AllProducts} />
         <Route path="/category/:categoryId" component={ProductsInCategory} />
+        <Route path="/cart" component={Cart} />
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
         {isLoggedIn && (
