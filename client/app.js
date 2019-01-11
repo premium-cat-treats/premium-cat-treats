@@ -1,14 +1,14 @@
 import React from 'react'
-
 import {Navbar} from './components'
 import Routes from './routes'
+import Aux from './components/Aux'
 
 const App = () => {
   return (
-    <div>
+    <Aux>
       <Navbar />
       <Routes />
-    </div>
+    </Aux>
   )
 }
 
