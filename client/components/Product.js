@@ -15,27 +15,18 @@ class Product extends Component {
     this.props.addToCart(product.id, quantity)
   }
 
-  // Function to dynamically add numbered options to the
-  // drop-down menu, so we don't display more items than
-  // are in stock.
-  createOptions = x => {
-    let options = []
-
-    // I think putting React tags in here is causing the
-    // eslint errors.
-    for (let i = 1; i <= x; i++) {
-      options.push(
-        <option key={i} value={`${i}`}>
-          {i}
-        </option>
-      )
-    }
-
-    return options
-  }
-
   render() {
     const {product} = this.props
+    const quantityOptions = new Array(product.quantity)
+    quantityOptions.fill('_')
+    const options = quantityOptions.map((option, i) => (
+      <option key={i} value={`${i + 1}`}>
+        {i + 1}
+      </option>
+    ))
+    console.log({quantityOptions})
+    console.log({options})
+
     return (
       <Card>
         <Image src={product.imageUrl} />
@@ -50,7 +41,7 @@ class Product extends Component {
           <Icon name="paw" />
           <div>
             <select ref={`${product.id}-quantity-drop-down`} defaultValue="1">
-              {this.createOptions(product.quantity)}
+              {options}
             </select>
             <button type="button" onClick={() => this.handleSubmit(product)}>
               Add to Cart
