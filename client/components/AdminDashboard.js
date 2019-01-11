@@ -1,10 +1,29 @@
 import React, {Component} from 'react'
-import {Grid} from 'semantic-ui-react'
+import {Grid, Button} from 'semantic-ui-react'
 import AddProductForm from './AddProducForm'
 import AllProducts from './AllProducts'
 import AdminUserMenu from './AdminUserMenu'
 
 class AdminDashboard extends Component {
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      isOpen: false
+    }
+  }
+
+  handleFormOpen = () => {
+    this.setState({
+      isOpen: true
+    })
+  }
+
+  handleCancel = () => {
+    this.setState({
+      isOpen: false
+    })
+  }
   render() {
     return (
       <div>
@@ -17,7 +36,14 @@ class AdminDashboard extends Component {
             <br />
             <AdminUserMenu />
             <br />
-            <AddProductForm />
+            <Button
+              onClick={this.handleFormOpen}
+              positive
+              content="Add New Product"
+            />
+            {this.state.isOpen && (
+              <AddProductForm handleCancel={this.handleCancel} />
+            )}
           </Grid.Column>
           <Grid.Column width={6} />
           <AllProducts />
