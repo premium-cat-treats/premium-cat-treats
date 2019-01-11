@@ -12,7 +12,6 @@ label {
 }
 
 .auth-form {
-  margin-top: 100px;
   font-family: 'Karla', sans-serif;
 }
 
@@ -50,6 +49,10 @@ nav a {
 .single-admin-product {
   width: 400px;
   height: 500px;
-  display: inline-block;
-  margin-top: 100px;
+}
+
+.aux {
+  display: flex;
+  width: 80%;
+  margin: 100px auto 100px;
 }

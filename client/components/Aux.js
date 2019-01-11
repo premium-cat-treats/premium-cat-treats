@@ -1,7 +1,5 @@
-// import React from 'react'
+import React from 'react'
 
-// const Aux = props => {
-//   return props.children
-// }
+const Aux = props => <div className="aux">{props.children}</div>
 
-// export default Aux
+export default Aux
