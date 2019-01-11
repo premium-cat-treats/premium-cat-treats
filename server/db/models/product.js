@@ -25,6 +25,11 @@ const Product = db.define('product', {
     type: Sequelize.STRING,
     defaultValue:
       'https://upload.wikimedia.org/wikipedia/commons/thumb/4/48/Cat_illustration.jpg/120px-Cat_illustration.jpg'
+  },
+  deleted: {
+    type: Sequelize.BOOLEAN,
+    defaultValue: false,
+    allowNull: false
   }
 })
 
