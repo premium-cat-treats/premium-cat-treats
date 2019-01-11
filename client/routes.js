@@ -29,7 +29,7 @@ class Routes extends Component {
           component={ManageableProduct}
         />
         <Route exact path="/" component={AllProducts} />
-        <Route path="/products/:categoryId" component={ProductsInCategory} />
+        <Route path="/category/:categoryId" component={ProductsInCategory} />
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
         {isLoggedIn && (

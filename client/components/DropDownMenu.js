@@ -11,7 +11,7 @@ class DropDownMenu extends Component {
   handleChange = event => {
     const value = Number(event.target.value)
 
-    this.props.history.push(`/products/${value}`)
+    this.props.history.push(`/category/${value}`)
   }
 
   render() {
