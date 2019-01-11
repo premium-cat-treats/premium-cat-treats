@@ -17,6 +17,7 @@ class Product extends Component {
 
   render() {
     const {product} = this.props
+    // Creates a dynamic array of options based on current product quantity.
     const quantityOptions = new Array(product.quantity)
     quantityOptions.fill('_')
     const options = quantityOptions.map((option, i) => (
