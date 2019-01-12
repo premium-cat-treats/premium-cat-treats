@@ -1,51 +1,43 @@
 import React, {Component} from 'react'
 import {Segment, Form, Button} from 'semantic-ui-react'
-import {postNewProduct, updateProductById} from '../store/product'
+import {postNewProduct} from '../store/product'
 import {connect} from 'react-redux'
 
 class AddProductForm extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      event: {
-        title: '',
-        description: '',
-        priceCents: '',
-        quantity: '',
-        imageUrl: ''
-      }
+      title: '',
+      description: '',
+      priceCents: '',
+      quantity: '',
+      imageUrl: ''
     }
   }
 
-  onFormSubmit = event => {
-    event.preventDefault()
-    this.setState({
-      isOpen: false
-    })
-  }
-  handleFormOpen = () => {
-    this.setState({
-      isOpen: true
-    })
+  onFormSubmit = evt => {
+    evt.preventDefault()
+    if (!isNaN(this.state.priceCents) && !isNaN(this.state.quantity)) {
+      const newProduct = {
+        title: this.state.title,
+        description: this.state.description,
+        quantity: this.state.quantity,
+        priceCents: this.state.priceCents,
+        imageUrl: this.state.imageUrl
+      }
+      this.props.postNewProduct(newProduct)
+      this.props.history.push('/products')
+    }
   }
 
-  handleCancel = () => {
+  onInputChange = evt => {
     this.setState({
-      isOpen: false
-    })
-  }
-  onInputChange = event => {
-    const newEvent = this.state.event
-    newEvent[event.target.name] = event.target.value
-    this.setState({
-      event: {
-        event: newEvent
-      }
+      [evt.target.name]: evt.target.value
     })
   }
   render() {
-    const {handleCancel} = this.props
-    const {event} = this.state
+    const {handleClose} = this.props
+    const {title, description, priceCents, quantity, imageUrl} = this.state
     return (
       <div>
         <Segment>
@@ -57,7 +49,7 @@ class AddProductForm extends Component {
               <input
                 name="title"
                 onChange={this.onInputChange}
-                value={event.title}
+                value={title}
                 type="text"
                 placeholder="Title"
               />
@@ -65,9 +57,9 @@ class AddProductForm extends Component {
             <Form.Field>
               <label>Image</label>
               <input
-                name="imageURL"
+                name="imageUrl"
                 onChange={this.onInputChange}
-                value={event.title}
+                value={imageUrl}
                 placeholder="Image URL"
               />
             </Form.Field>
@@ -76,7 +68,7 @@ class AddProductForm extends Component {
               <input
                 name="priceCents"
                 onChange={this.onInputChange}
-                value={event.title}
+                value={priceCents}
                 placeholder="Enter the Price"
               />
             </Form.Field>
@@ -85,7 +77,7 @@ class AddProductForm extends Component {
               <input
                 name="quantity"
                 onChange={this.onInputChange}
-                value={event.title}
+                value={quantity}
                 placeholder="Quantity"
               />
             </Form.Field>
@@ -94,14 +86,14 @@ class AddProductForm extends Component {
               <input
                 name="description"
                 onChange={this.onInputChange}
-                value={event.title}
+                value={description}
                 placeholder="Description of product"
               />
             </Form.Field>
             <Button positive type="submit">
               Submit
             </Button>
-            <Button onClick={handleCancel} type="button">
+            <Button onClick={handleClose} type="button">
               Cancel
             </Button>
           </Form>
@@ -112,9 +104,7 @@ class AddProductForm extends Component {
 }
 
 const mapDispatchToProps = dispatch => ({
-  postProduct: productInfo => dispatch(postNewProduct(productInfo)),
-  updateProduct: (productInfo, id) =>
-    dispatch(updateProductById(productInfo, id))
+  postNewProduct: productInfo => dispatch(postNewProduct(productInfo))
 })
 
 export default connect(null, mapDispatchToProps)(AddProductForm)

@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {Grid, Button} from 'semantic-ui-react'
-import AddProductForm from './AddProducForm'
+import AddProductForm from './AddProductForm'
 import AllProducts from './AllProducts'
 import AdminUserMenu from './AdminUserMenu'
 
@@ -19,7 +19,7 @@ class AdminDashboard extends Component {
     })
   }
 
-  handleCancel = () => {
+  handleClose = () => {
     this.setState({
       isOpen: false
     })
@@ -42,7 +42,7 @@ class AdminDashboard extends Component {
               content="Add New Product"
             />
             {this.state.isOpen && (
-              <AddProductForm handleCancel={this.handleCancel} />
+              <AddProductForm handleClose={this.handleClose} />
             )}
           </Grid.Column>
           <Grid.Column width={6} />
