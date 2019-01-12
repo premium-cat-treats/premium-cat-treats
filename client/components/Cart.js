@@ -11,6 +11,8 @@ class Cart extends Component {
     this.state = {
       totalPriceCents: 0
     }
+
+    this.componentDidMount = this.componentDidMount.bind(this)
   }
 
   componentDidMount() {
@@ -22,8 +24,6 @@ class Cart extends Component {
 
     this.setState({totalPriceCents})
   }
-
-  // TODO: pass down function to each cartItem to update totalPriceCents on change.
 
   render() {
     const {cart, updateItemQuantity} = this.props
@@ -40,6 +40,7 @@ class Cart extends Component {
                     key={cartItem.product.id}
                     cartItem={cartItem}
                     updateItemQuantity={updateItemQuantity}
+                    onQuantityUpdate={this.componentDidMount}
                   />
                 )
               })}
