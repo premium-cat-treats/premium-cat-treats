@@ -16,7 +16,9 @@ Category.belongsToMany(Product, {through: 'product_category'})
 
 Order.belongsTo(User)
 User.hasMany(Order)
+Order.belongsTo(Product)
 Product.hasMany(Order)
+Order.belongsTo(OrderTotal)
 OrderTotal.hasMany(Order)
 
 /**

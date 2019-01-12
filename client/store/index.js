@@ -6,11 +6,13 @@ import user from './user'
 import {products, currentProduct} from './product'
 import {categoriesReducer} from './category'
 import {cartReducer} from './cart'
+import {userOrders} from './order'
 
 const reducer = combineReducers({
   user,
   products,
   currentProduct,
+  userOrders,
   categories: categoriesReducer,
   cart: cartReducer
 })
