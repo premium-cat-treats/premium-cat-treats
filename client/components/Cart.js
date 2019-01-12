@@ -4,6 +4,24 @@ import CartItem from './CartItem'
 import {List, Button} from 'semantic-ui-react'
 
 class Cart extends Component {
+  constructor() {
+    super()
+
+    this.state = {
+      totalPriceCents: 0
+    }
+  }
+
+  componentDidMount() {
+    const {cart: cartItems} = this.props
+    const totalPriceCents = cartItems.reduce(
+      (total, item) => total + item.product.priceCents * item.quantity,
+      0
+    )
+
+    this.setState({totalPriceCents})
+  }
+
   render() {
     const {cart} = this.props
 
@@ -19,6 +37,7 @@ class Cart extends Component {
                 )
               })}
             </List>
+            <h3>Total: ${this.state.totalPriceCents / 100}</h3>
             <Button>Submit Order</Button>
           </div>
         ) : (

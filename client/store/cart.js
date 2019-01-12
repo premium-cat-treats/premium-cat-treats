@@ -7,7 +7,26 @@ export const addToCart = (product, quantity) => ({
   payload: {product, quantity}
 })
 
-export const cartReducer = (state = [], action) => {
+//
+// ==== TEMPORARY! DELETE AND RESET STATE TO = [] =======
+const tempState = [
+  {
+    product: {
+      id: 1,
+      title: 'Shepards Pie',
+      description:
+        'Give your cat a trip to the English country side with minced red meat, cooked in a gravy with onions, vegetables, and topped with catnip',
+      priceCents: 299,
+      quantity: 50,
+      imageUrl:
+        'https://upload.wikimedia.org/wikipedia/commons/thumb/4/48/Cat_illustration.jpg/120px-Cat_illustration.jpg',
+      deleted: false
+    },
+    quantity: 1
+  }
+]
+
+export const cartReducer = (state = tempState, action) => {
   switch (action.type) {
     case ADD_TO_CART:
       // If the item already exists in the cart, add to
