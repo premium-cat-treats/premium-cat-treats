@@ -22,6 +22,8 @@ class Cart extends Component {
     this.setState({totalPriceCents})
   }
 
+  // TODO: pass down function to each cartItem to update totalPriceCents on change.
+
   render() {
     const {cart} = this.props
 
