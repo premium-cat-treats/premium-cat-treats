@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import CartItem from './CartItem'
 import {List, Button} from 'semantic-ui-react'
-import {updateItemQuantity} from '../store/cart'
+import {updateItemQuantity, deleteItem} from '../store/cart'
 
 class Cart extends Component {
   constructor() {
@@ -11,11 +11,9 @@ class Cart extends Component {
     this.state = {
       totalPriceCents: 0
     }
-
-    this.componentDidMount = this.componentDidMount.bind(this)
   }
 
-  componentDidMount() {
+  componentDidMount = () => {
     const {cart: cartItems} = this.props
     const totalPriceCents = cartItems.reduce(
       (total, item) => total + item.product.priceCents * item.quantity,
@@ -26,7 +24,7 @@ class Cart extends Component {
   }
 
   render() {
-    const {cart, updateItemQuantity} = this.props
+    const {cart, updateItemQuantity, deleteItem} = this.props
 
     return (
       <div>
@@ -41,11 +39,12 @@ class Cart extends Component {
                     cartItem={cartItem}
                     updateItemQuantity={updateItemQuantity}
                     onQuantityUpdate={this.componentDidMount}
+                    deleteItem={deleteItem}
                   />
                 )
               })}
             </List>
-            <h3>Total: ${this.state.totalPriceCents / 100}</h3>
+            <h3>Total: ${(this.state.totalPriceCents / 100).toFixed(2)}</h3>
             <Button>Submit Order</Button>
           </div>
         ) : (
@@ -63,7 +62,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   updateItemQuantity: (product, quantity) =>
-    dispatch(updateItemQuantity(product, quantity))
+    dispatch(updateItemQuantity(product, quantity)),
+  deleteItem: productId => dispatch(deleteItem(productId))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Cart)

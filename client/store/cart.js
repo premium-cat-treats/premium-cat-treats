@@ -1,6 +1,7 @@
 // CONSTANTS
 const ADD_TO_CART = 'ADD_TO_CART'
 const UPDATE_ITEM_QUANTITY = 'UPDATE_ITEM_QUANTITY'
+const DELETE_ITEM = 'DELETE_ITEM'
 
 // ACTION CREATORS
 export const addToCart = (product, quantity) => ({
@@ -13,26 +14,12 @@ export const updateItemQuantity = (product, quantity) => ({
   payload: {product, quantity}
 })
 
-//
-// ==== TEMPORARY! DELETE AND RESET STATE TO = [] =======
-const tempState = [
-  {
-    product: {
-      id: 1,
-      title: 'Shepards Pie',
-      description:
-        'Give your cat a trip to the English country side with minced red meat, cooked in a gravy with onions, vegetables, and topped with catnip',
-      priceCents: 299,
-      quantity: 50,
-      imageUrl:
-        'https://upload.wikimedia.org/wikipedia/commons/thumb/4/48/Cat_illustration.jpg/120px-Cat_illustration.jpg',
-      deleted: false
-    },
-    quantity: 1
-  }
-]
+export const deleteItem = productId => ({
+  type: DELETE_ITEM,
+  productId
+})
 
-export const cartReducer = (state = tempState, action) => {
+export const cartReducer = (state = [], action) => {
   switch (action.type) {
     case ADD_TO_CART:
       // If the item already exists in the cart, add to
@@ -53,6 +40,8 @@ export const cartReducer = (state = tempState, action) => {
         }
         return item
       })
+    case DELETE_ITEM:
+      return state.filter(item => item.product.id !== action.productId)
     default:
       return state
   }
