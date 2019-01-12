@@ -43,8 +43,12 @@ async function seed() {
   await products[0].addCategory(categories[0])
   await products[1].addCategory(categories[1])
 
-  const total = await OrderTotal.create({
+  const total1 = await OrderTotal.create({
     totalCents: 299 * 4 + 599 * 2
+  })
+
+  const total2 = await OrderTotal.create({
+    totalCents: 599 * 5
   })
 
   const orders = await Promise.all([
@@ -53,7 +57,7 @@ async function seed() {
       quantityOrdered: 4,
       userId: 1,
       productId: 1,
-      orderTotalId: total.id
+      orderTotalId: total1.id
     }),
     Order.create({
       status: 'Processing',
@@ -61,7 +65,15 @@ async function seed() {
       quantityOrdered: 2,
       userId: 1,
       productId: 2,
-      orderTotalId: total.id
+      orderTotalId: total1.id
+    }),
+    Order.create({
+      status: 'Processing',
+      historicalPriceCents: 599,
+      quantityOrdered: 5,
+      userId: 1,
+      productId: 2,
+      orderTotalId: total2.id
     })
   ])
 
