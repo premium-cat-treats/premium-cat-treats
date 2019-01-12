@@ -7,21 +7,42 @@ import Order from './order'
 class OrderHistory extends Component {
   async componentDidMount() {
     await this.props.getUser()
-    await this.props.fetchOrders(this.props.user.id)
+    await this.props.getOrders(this.props.user.id)
   }
 
   render() {
+    const userOrders = []
+    const createOrderSections = ords => {
+      const ordKeys = Object.keys(ords)
+      ordKeys.forEach(key => {
+        const orderGroup = (
+          <div key={key}>
+            <h3>
+              <strong>Order Total:</strong>{' '}
+              {(ords[key][0].orderTotal.totalCents / 100).toFixed(2)}
+            </h3>
+            <h4>Date: {ords[key][0].orderTotal.createAt}</h4>
+            {ords[key].map(singleOrder => {
+              return (
+                <Order
+                  key={singleOrder.id}
+                  orderItem={singleOrder.product.title}
+                  image={singleOrder.product.imageUrl}
+                  price={(singleOrder.historicalPriceCents / 100).toFixed(2)}
+                  quantity={singleOrder.quantityOrdered}
+                />
+              )
+            })}
+          </div>
+        )
+        userOrders.push(orderGroup)
+      })
+    }
+    createOrderSections(this.props.orders)
     return (
       <div>
-        {this.state.orders.map(order => (
-          <Order
-            key={order.id}
-            orderItem={order.product.title}
-            image={order.product.imageUrl}
-            price={+order.product.price}
-            date={order.createdAt}
-          />
-        ))}
+        <h1>Order History</h1>
+        {userOrders}
       </div>
     )
   }
@@ -29,12 +50,12 @@ class OrderHistory extends Component {
 
 const mapStateToProps = state => ({
   user: state.user,
-  orders: state.orders
+  orders: state.userOrders
 })
 
 const mapDispatchToProps = dispatch => ({
   getUser: () => dispatch(me()),
-  getOrders: id => dispatch(fetchOrders(id))
+  getOrders: userId => dispatch(fetchOrders(userId))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(OrderHistory)

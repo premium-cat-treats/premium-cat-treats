@@ -14,7 +14,7 @@ export const fetchOrders = userId => {
   }
 }
 
-export const orders = (state = [], action) => {
+export const userOrders = (state = {}, action) => {
   switch (action.type) {
     case GOT_ORDERS:
       return action.payload

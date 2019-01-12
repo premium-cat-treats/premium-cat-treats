@@ -1,18 +1,31 @@
 const router = require('express').Router()
 const Order = require('../db/models/order')
-const User = require('../db/models/user')
-const Product = require('../db/models/product')
+// const OrderTotal = require('../db/models/orderTotal')
+// const Product = require('../db/models/product')
 module.exports = router
 
-router.get('/:id', async (req, res, next) => {
+const groupOrdersByTotal = usersOrders => {
+  const groupedOrders = {}
+  usersOrders.forEach(singleOrder => {
+    if (!groupedOrders['group' + singleOrder.orderTotal.id]) {
+      groupedOrders['group' + singleOrder.orderTotal.id] = [singleOrder]
+    } else {
+      groupedOrders['group' + singleOrder.orderTotal.id].push(singleOrder)
+    }
+  })
+  return groupedOrders
+}
+
+router.get('/:userId', async (req, res, next) => {
   try {
-    const products = await Order.findAll({
+    const orders = await Order.findAll({
       where: {
-        userid: req.params.id
+        userId: req.params.userId
       },
-      include: [{model: Product}]
+      include: [{all: true}]
     })
-    res.send(products)
+    const userOrders = groupOrdersByTotal(orders)
+    res.json(userOrders)
   } catch (error) {
     next(error)
   }
