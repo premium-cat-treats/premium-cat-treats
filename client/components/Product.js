@@ -12,7 +12,7 @@ class Product extends Component {
 
   handleSubmit = product => {
     const quantity = Number(this.refs[`${product.id}-quantity-drop-down`].value)
-    this.props.addToCart(product.id, quantity)
+    this.props.addToCart(product, quantity)
   }
 
   render() {
@@ -25,8 +25,6 @@ class Product extends Component {
         {i + 1}
       </option>
     ))
-    console.log({quantityOptions})
-    console.log({options})
 
     return (
       <Card>
@@ -67,7 +65,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   getUser: () => dispatch(me()),
-  addToCart: (productId, quantity) => dispatch(addToCart(productId, quantity))
+  addToCart: (product, quantity) => dispatch(addToCart(product, quantity))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Product)
