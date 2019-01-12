@@ -3,6 +3,7 @@ import {Grid, Button} from 'semantic-ui-react'
 import AddProductForm from './AddProductForm'
 import AllProducts from './AllProducts'
 import AdminUserMenu from './AdminUserMenu'
+import {connect} from 'react-redux'
 
 class AdminDashboard extends Component {
   constructor(props) {
@@ -27,6 +28,7 @@ class AdminDashboard extends Component {
   render() {
     return (
       <div>
+      { this.props.user.adminAccess ? 
         <Grid>
           <Grid.Column width={9}>
             <br />
@@ -47,10 +49,18 @@ class AdminDashboard extends Component {
           </Grid.Column>
           <Grid.Column width={6} />
           <AllProducts />
-        </Grid>
+        </Grid> : (
+          <div>
+            <h1>You don't have access to this page!</h1>
+          </div>
+        )}
       </div>
     )
   }
 }
 
-export default AdminDashboard
+const mapStateToProps = state => ({
+  user: state.user
+})
+
+export default connect(mapStateToProps)(AdminDashboard)

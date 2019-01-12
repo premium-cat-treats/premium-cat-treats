@@ -5,7 +5,7 @@ import {Link} from 'react-router-dom'
 import {logout} from '../store'
 import DropDownMenu from './DropDownMenu'
 
-const Navbar = ({handleClick, isLoggedIn}) => (
+const Navbar = ({handleClick, isLoggedIn, user}) => (
   <div className="navbar">
     <Link to="/">
       <h2>PREMIUM CAT TREATS</h2>
@@ -15,6 +15,7 @@ const Navbar = ({handleClick, isLoggedIn}) => (
       {isLoggedIn ? (
         <div>
           {/* The navbar will show these links after you log in */}
+          <Link to="/cart">Cart</Link>
           <Link to="/admin">Admin</Link>
           <Link to="/home">Home</Link>
           <a href="#" onClick={handleClick}>
@@ -24,6 +25,7 @@ const Navbar = ({handleClick, isLoggedIn}) => (
       ) : (
         <div>
           {/* The navbar will show these links before you log in */}
+          <Link to="/cart">Cart</Link>
           <Link to="/login">Login</Link>
           <Link to="/signup">Sign Up</Link>
         </div>
@@ -37,7 +39,8 @@ const Navbar = ({handleClick, isLoggedIn}) => (
  */
 const mapState = state => {
   return {
-    isLoggedIn: !!state.user.id
+    isLoggedIn: !!state.user.id,
+    user: state.user
   }
 }
 
