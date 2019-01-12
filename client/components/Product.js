@@ -14,32 +14,20 @@ class Product extends Component {
     const quantityAddingToCart = Number(
       this.refs[`${productInDB.id}-quantity-drop-down`].value
     )
-    const [productInCart] = this.props.cart.filter(
-      item => item.product.id === productInDB.id
-    )
-    const cartItemQuantity = productInCart ? productInCart.quantity : undefined
 
-    // Check to see how many items are left in the DB to
-    // add to the cart. Provides a helpful message if the
-    // user tries to add more items than are available.
-    // Only update redux state with a valid quantity that
-    // doesn't exceed the quantity in the DB.
-    if (quantityAddingToCart > productInDB.quantity - cartItemQuantity) {
-      alert(
-        `You may add ${productInDB.quantity -
-          cartItemQuantity} more item(s) to your cart as there are only ${
-          productInDB.quantity
-        } items total in stock.`
-      )
-    } else {
-      this.props.addToCart(productInDB, quantityAddingToCart)
-    }
+    this.props.addToCart(productInDB, quantityAddingToCart)
   }
 
   render() {
     const {product} = this.props
-    // Creates a dynamic array of options based on current product quantity.
-    const quantityOptions = new Array(product.quantity)
+    const [productInCart] = this.props.cart.filter(
+      item => item.product.id === product.id
+    )
+    const cartItemQuantity = productInCart ? productInCart.quantity : 0
+
+    // Creates a dynamic array of options based on available
+    // items in stock minus what is already in the cart.
+    const quantityOptions = new Array(product.quantity - cartItemQuantity)
     quantityOptions.fill('_')
     const options = quantityOptions.map((option, i) => (
       <option key={i} value={`${i + 1}`}>
@@ -63,7 +51,12 @@ class Product extends Component {
             <select ref={`${product.id}-quantity-drop-down`} defaultValue="1">
               {options}
             </select>
-            <button type="button" onClick={() => this.handleSubmit(product)}>
+            {/* Button disables if the user already has already placed all available items in stock into their cart. */}
+            <button
+              type="button"
+              disabled={product.quantity - cartItemQuantity ? '' : 'true'}
+              onClick={() => this.handleSubmit(product)}
+            >
               Add to Cart
             </button>
           </div>
