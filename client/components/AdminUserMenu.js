@@ -13,7 +13,7 @@ class AdminUserMenu extends Component {
       <div>
         <Menu pointing>
           <Menu.Item
-            name="home"
+            name="products"
             active={activeItem === 'products'}
             onClick={this.handleItemClick}
           />
@@ -29,7 +29,7 @@ class AdminUserMenu extends Component {
           />
           <Menu.Menu position="right">
             <Menu.Item>
-              <Input icon="search" placeholder="Search..." />
+              <Input icon="search&quot; placeholder=&quot;Search..." />
             </Menu.Item>
           </Menu.Menu>
         </Menu>
