@@ -1,8 +1,8 @@
 import React from 'react'
 import {Button, Image, List} from 'semantic-ui-react'
 
-const CartItem = ({cartItem}) => {
-  const {product} = cartItem
+const CartItem = ({cartItem, updateItemQuantity}) => {
+  const {product, quantity} = cartItem
   // Creates a dynamic array of options based on current product quantity.
   const quantityOptions = new Array(product.quantity)
   quantityOptions.fill('_')
@@ -17,11 +17,18 @@ const CartItem = ({cartItem}) => {
       <List.Content floated="right">
         <Button>Delete</Button>
       </List.Content>
-      <Image size="tiny" src={cartItem.product.imageUrl} />
+      <Image size="tiny" src={product.imageUrl} />
       <List.Content>
-        {cartItem.product.title} || Price: ${cartItem.product.priceCents / 100}{' '}
-        || Quantity:
-        <select defaultValue={cartItem.quantity}>{options}</select>
+        {product.title}
+        || Price: ${product.priceCents / 100} || Quantity:
+        <select
+          defaultValue={quantity}
+          onChange={event =>
+            updateItemQuantity(product, Number(event.target.value))
+          }
+        >
+          {options}
+        </select>
       </List.Content>
     </List.Item>
   )

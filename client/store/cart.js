@@ -1,9 +1,15 @@
 // CONSTANTS
 const ADD_TO_CART = 'ADD_TO_CART'
+const UPDATE_ITEM_QUANTITY = 'UPDATE_ITEM_QUANTITY'
 
 // ACTION CREATORS
 export const addToCart = (product, quantity) => ({
   type: ADD_TO_CART,
+  payload: {product, quantity}
+})
+
+export const updateItemQuantity = (product, quantity) => ({
+  type: UPDATE_ITEM_QUANTITY,
   payload: {product, quantity}
 })
 
@@ -39,8 +45,14 @@ export const cartReducer = (state = tempState, action) => {
           return item
         })
       }
-
       return [...state, action.payload]
+    case UPDATE_ITEM_QUANTITY:
+      return state.map(item => {
+        if (item.product.id === action.payload.product.id) {
+          item.quantity = action.payload.quantity
+        }
+        return item
+      })
     default:
       return state
   }

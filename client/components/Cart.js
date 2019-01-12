@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import CartItem from './CartItem'
 import {List, Button} from 'semantic-ui-react'
+import {updateItemQuantity} from '../store/cart'
 
 class Cart extends Component {
   constructor() {
@@ -25,7 +26,7 @@ class Cart extends Component {
   // TODO: pass down function to each cartItem to update totalPriceCents on change.
 
   render() {
-    const {cart} = this.props
+    const {cart, updateItemQuantity} = this.props
 
     return (
       <div>
@@ -35,7 +36,11 @@ class Cart extends Component {
             <List divided verticalAlign="middle">
               {cart.map(cartItem => {
                 return (
-                  <CartItem key={cartItem.product.id} cartItem={cartItem} />
+                  <CartItem
+                    key={cartItem.product.id}
+                    cartItem={cartItem}
+                    updateItemQuantity={updateItemQuantity}
+                  />
                 )
               })}
             </List>
@@ -55,4 +60,9 @@ const mapStateToProps = state => ({
   user: state.user
 })
 
-export default connect(mapStateToProps)(Cart)
+const mapDispatchToProps = dispatch => ({
+  updateItemQuantity: (product, quantity) =>
+    dispatch(updateItemQuantity(product, quantity))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Cart)
