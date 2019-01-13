@@ -66,11 +66,29 @@ nav a {
 }
 
 .single-order-history {
-  padding: 10px;
+  padding: 20px;
   border: 1px solid black;
-  margin: 10px 0;
+  margin: 15px 0;
+  display: flex;
+  flex-direction: column;
 }
 
 .single-order {
-  padding: 15px;
+  padding: 20px 20px 20px 45px;
+  border: 1px solid #ccc;
+  margin: 15px 10px;
+  box-shadow: 0 2px 3px #eee;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.single-order-paragraph {
+  font-size: 14px;
+}
+
+.order-id {
+  position: relative;
+  justify-self: flex-end;
+  color: slategray;
 }
