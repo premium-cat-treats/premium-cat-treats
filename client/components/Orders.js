@@ -17,30 +17,19 @@ class OrderHistory extends Component {
       ordKeys.forEach(key => {
         const orderGroup = (
           <div key={key} className="single-order-history">
-            <p
-              style={{
-                fontSize: '22px',
-                marginBottom: '0',
-                display: 'inline-block'
-              }}
-            >
+            <h3>
               <strong>Order Total: </strong>
               ${(ords[key][0].orderTotal.totalCents / 100).toFixed(2)}
-            </p>
-            <p style={{fontSize: '14px', display: 'inline-block'}}>
-              <strong>Order Id: </strong>
-              {ords[key][0].orderTotal.id}
-            </p>
-            <p style={{fontSize: '16px'}}>
-              <strong>Order Placed: </strong>
+            </h3>
+            <h4>
+              <strong>Date: </strong>
               {ords[key][0].orderTotal.orderDate}
-            </p>
+            </h4>
             {ords[key].map(singleOrder => {
               return (
                 <Order
                   key={singleOrder.id}
                   orderItem={singleOrder.product.title}
-                  productId={singleOrder.product.id}
                   image={singleOrder.product.imageUrl}
                   price={(singleOrder.historicalPriceCents / 100).toFixed(2)}
                   quantity={singleOrder.quantityOrdered}
@@ -56,7 +45,7 @@ class OrderHistory extends Component {
     createOrderSections(this.props.orders)
     return (
       <div className="order-history">
-        <h1>Previous Orders</h1>
+        <h1>Order History</h1>
         {userOrders}
       </div>
     )
