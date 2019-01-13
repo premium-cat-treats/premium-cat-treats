@@ -10,15 +10,24 @@ class Product extends Component {
     this.props.getUser()
   }
 
-  handleSubmit = product => {
-    const quantity = Number(this.refs[`${product.id}-quantity-drop-down`].value)
-    this.props.addToCart(product, quantity)
+  handleSubmit = productInDB => {
+    const quantityAddingToCart = Number(
+      this.refs[`${productInDB.id}-quantity-drop-down`].value
+    )
+
+    this.props.addToCart(productInDB, quantityAddingToCart)
   }
 
   render() {
     const {product} = this.props
-    // Creates a dynamic array of options based on current product quantity.
-    const quantityOptions = new Array(product.quantity)
+    const [productInCart] = this.props.cart.filter(
+      item => item.product.id === product.id
+    )
+    const cartItemQuantity = productInCart ? productInCart.quantity : 0
+
+    // Creates a dynamic array of options based on available
+    // items in stock minus what is already in the cart.
+    const quantityOptions = new Array(product.quantity - cartItemQuantity)
     quantityOptions.fill('_')
     const options = quantityOptions.map((option, i) => (
       <option key={i} value={`${i + 1}`}>
@@ -42,7 +51,12 @@ class Product extends Component {
             <select ref={`${product.id}-quantity-drop-down`} defaultValue="1">
               {options}
             </select>
-            <button type="button" onClick={() => this.handleSubmit(product)}>
+            {/* Button disables if the user already has already placed all available items in stock into their cart. */}
+            <button
+              type="button"
+              disabled={product.quantity - cartItemQuantity ? '' : 'true'}
+              onClick={() => this.handleSubmit(product)}
+            >
               Add to Cart
             </button>
           </div>
@@ -60,7 +74,8 @@ class Product extends Component {
 }
 
 const mapStateToProps = state => ({
-  user: state.user
+  user: state.user,
+  cart: state.cart
 })
 
 const mapDispatchToProps = dispatch => ({
