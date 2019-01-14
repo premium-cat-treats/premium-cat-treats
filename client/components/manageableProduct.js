@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import ProductForm from './productForm'
 import {connect} from 'react-redux'
 import {updateProductById, fetchSingleProduct} from '../store/product'
-import {Button, Container} from 'semantic-ui-react'
+import {Button, Container, Icon} from 'semantic-ui-react'
 
 class ManageableProduct extends Component {
   constructor(props) {
