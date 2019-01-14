@@ -7,6 +7,12 @@ class ManageableUser extends Component {
   componentDidMount() {
     this.props.fetchSingleUser(this.props.match.params.userId)
   }
+
+  deleteProduct = id => {
+    this.props.updateUser({deleted: true}, id)
+    this.props.history.push('/users')
+  }
+
   render() {
     return (
       <div>
