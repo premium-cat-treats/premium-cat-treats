@@ -28,6 +28,7 @@ const Navbar = ({handleClick, isLoggedIn, user}) => (
           <Link to="/home">
             <Icon name="home" size="large" />Home
           </Link>
+          <Link to={`/orders/${user.id}`}>Orders</Link>
           <a href="#" onClick={handleClick}>
             <Icon name="log out" size="large" />Log Out
           </a>

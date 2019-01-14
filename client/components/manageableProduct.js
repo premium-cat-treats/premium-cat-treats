@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import ProductForm from './productForm'
 import {connect} from 'react-redux'
 import {updateProductById, fetchSingleProduct} from '../store/product'
-import {Icon} from 'semantic-ui-react'
+import {Button, Container, Icon} from 'semantic-ui-react'
 
 class ManageableProduct extends Component {
   constructor(props) {
@@ -80,24 +80,37 @@ class ManageableProduct extends Component {
     } = this.props.product
     return (
       <div className="single-admin-product">
+        <h2>Edit this Product</h2>
         {this.props.product && this.props.product.id ? (
-          <div>
-            <div>
+          <Container>
+            <div className="single-product">
               <h3>{title}</h3>
-              <img src={imageUrl} />
-              <h4>${(priceCents / 100).toFixed(2)}</h4>
-              <h4>{quantity}</h4>
-              <p>{description}</p>
+              <img src={imageUrl} style={{marginBottom: '15px'}} />
+              <p style={{fontSize: '14px'}}>
+                <strong>Price: </strong>${(priceCents / 100).toFixed(2)}
+              </p>
+              <p style={{display: 'inline-block', fontSize: '14px'}}>
+                <strong>Qty: </strong>
+                {quantity}
+              </p>
+              <p style={{marginBottom: '15px'}}>
+                <strong>Product Description: </strong>
+                {description}
+              </p>
+
+              <Button
+                onClick={() => this.deleteProduct(id)}
+                style={{color: '#944317'}}
+              >
+                Delete this Product
+              </Button>
             </div>
-            <button onClick={() => this.deleteProduct(id)}>
-              Delete this Product
-            </button>
             <ProductForm
               formData={this.state}
               handleChange={this.handleChange}
               handleSubmit={this.handleSubmit}
             />
-          </div>
+          </Container>
         ) : null}
       </div>
     )

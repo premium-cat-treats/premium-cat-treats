@@ -20,6 +20,26 @@ form div {
   display: inline-block;
 }
 
+.form {
+  width: 100%;
+  margin: 25px auto;
+  border: solid 1px black;
+  display: flex;
+  direction: column;
+  justify-content: flex-start;
+  padding: 20px;
+}
+
+.form input {
+  width: 100%;
+  background-color: #eee;
+}
+
+.form textarea {
+  width: 100%;
+  background-color: #eee;
+}
+
 .navbar {
   height: 70px;
   width: 100%;
@@ -47,8 +67,9 @@ nav a {
 }
 
 .single-admin-product {
-  width: 400px;
-  height: 500px;
+  width: 60%;
+  margin: 0 auto;
+  position: relative;
 }
 
 .aux {
@@ -66,11 +87,43 @@ nav a {
 }
 
 .single-order-history {
-  padding: 10px;
+  padding: 20px;
   border: 1px solid black;
-  margin: 10px 0;
+  margin: 15px 0;
+  display: flex;
+  flex-direction: column;
 }
 
 .single-order {
-  padding: 15px;
+  padding: 20px 20px 20px 45px;
+  border: 1px solid #ccc;
+  margin: 15px 10px;
+  box-shadow: 0 2px 3px #eee;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.single-order-paragraph {
+  font-size: 14px;
+}
+
+.order-id {
+  position: relative;
+  justify-self: flex-end;
+  color: slategray;
+}
+
+.single-product {
+  padding: 20px 20px 20px 45px;
+  border: 1px solid #ccc;
+  margin: 15px 10px;
+  box-shadow: 0 2px 3px #eee;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.form-item {
+  display: block;
+  margin: 5px;
 }
