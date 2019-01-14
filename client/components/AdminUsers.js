@@ -12,7 +12,7 @@ class AdminUsers extends Component {
     return (
       <div>
         <AdminDashboard />
-        {this.props.users.length && this.props.users.adminAccess ? (
+        {this.props.users.length ? (
           <div>
             <h2>Current Users</h2>
             <UserList users={this.props.users} />
