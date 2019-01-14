@@ -27,7 +27,9 @@ export const cartReducer = (state = [], action) => {
       if (state.some(item => item.product.id === action.payload.product.id)) {
         return state.map(item => {
           if (item.product.id === action.payload.product.id) {
-            item.quantity = item.quantity + action.payload.quantity
+            const newItem = {...item}
+            newItem.quantity = item.quantity + action.payload.quantity
+            return newItem
           }
           return item
         })
@@ -36,7 +38,9 @@ export const cartReducer = (state = [], action) => {
     case UPDATE_ITEM_QUANTITY:
       return state.map(item => {
         if (item.product.id === action.payload.product.id) {
-          item.quantity = action.payload.quantity
+          const newItem = {...item}
+          newItem.quantity = action.payload.quantity
+          return newItem
         }
         return item
       })
