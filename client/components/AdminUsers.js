@@ -9,18 +9,15 @@ class AdminUsers extends Component {
     this.props.fetchUsers()
   }
   render() {
-    console.log(this.props.users)
     return (
       <div>
         <AdminDashboard />
-        <h2>Current Users</h2>
-        {this.props.users.length ? (
+        {this.props.users.length && this.props.users.adminAccess ? (
           <div>
+            <h2>Current Users</h2>
             <UserList users={this.props.users} />
           </div>
-        ) : (
-          <div>No users in database.</div>
-        )}
+        ) : null}
       </div>
     )
   }

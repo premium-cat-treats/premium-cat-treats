@@ -8,7 +8,6 @@ class ManageableUser extends Component {
     this.props.fetchSingleUser(this.props.match.params.userId)
   }
   render() {
-    console.log(this.props)
     return (
       <div>
         <h1>USER INFO</h1>
@@ -25,8 +24,7 @@ class ManageableUser extends Component {
 }
 
 const mapStateToProps = state => ({
-  users: state.users,
-  orders: state.userOrders
+  users: state.users
 })
 
 const mapDispatchToProps = dispatch => ({
