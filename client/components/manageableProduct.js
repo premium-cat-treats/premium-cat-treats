@@ -3,6 +3,7 @@ import ProductForm from './productForm'
 import {connect} from 'react-redux'
 import {updateProductById, fetchSingleProduct} from '../store/product'
 import {Button, Container, Icon} from 'semantic-ui-react'
+// import {UpdateProductMessage} from './updateProductMessage'
 
 class ManageableProduct extends Component {
   constructor(props) {
@@ -12,7 +13,9 @@ class ManageableProduct extends Component {
       description: '',
       priceCents: '',
       quantity: '',
-      imageUrl: ''
+      imageUrl: '',
+      messageIsShowing: false,
+      message: ''
     }
   }
 
@@ -29,13 +32,20 @@ class ManageableProduct extends Component {
 
   deleteProduct = id => {
     this.props.updateProduct({deleted: true}, id)
-    this.props.history.push('/products')
+    this.setState({
+      message: 'This product has been deleted',
+      messageIsShowing: true
+    })
   }
 
   handleChange = event => {
     this.setState({
       [event.target.name]: event.target.value
     })
+  }
+
+  toggleMessageOff = () => {
+    this.setState({messageIsShowing: false})
   }
 
   handleSubmit = event => {
@@ -63,8 +73,10 @@ class ManageableProduct extends Component {
         imageUrl: this.state.imageUrl
       }
       this.props.updateProduct(updateObject, this.props.product.id)
-      this.props.history.push('/products')
-      //TODO: Add user message for successful update
+      this.setState({
+        message: 'This product has been deleted',
+        messageIsShowing: true
+      })
     }
     //TODO: Add user message for invalid input data
   }
@@ -80,12 +92,16 @@ class ManageableProduct extends Component {
     } = this.props.product
     return (
       <div className="single-admin-product">
-        <h2>Edit this Product</h2>
+        <h2 style={{marginBottom: '15px'}}>Edit this Product</h2>
         {this.props.product && this.props.product.id ? (
           <Container>
             <div className="single-product">
               <h3>{title}</h3>
               <img src={imageUrl} style={{marginBottom: '15px'}} />
+              <p style={{fontSize: '14px'}}>
+                <strong>Product Id: </strong>
+                {id}
+              </p>
               <p style={{fontSize: '14px'}}>
                 <strong>Price: </strong>${(priceCents / 100).toFixed(2)}
               </p>
@@ -93,7 +109,7 @@ class ManageableProduct extends Component {
                 <strong>Qty: </strong>
                 {quantity}
               </p>
-              <p style={{marginBottom: '15px'}}>
+              <p style={{marginBottom: '20px'}}>
                 <strong>Product Description: </strong>
                 {description}
               </p>
