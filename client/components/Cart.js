@@ -23,6 +23,16 @@ class Cart extends Component {
     this.setState({totalPriceCents})
   }
 
+  updateCartTotal = () => {
+    const {cart: cartItems} = this.props
+    const totalPriceCents = cartItems.reduce(
+      (total, item) => total + item.product.priceCents * item.quantity,
+      0
+    )
+
+    this.setState({totalPriceCents})
+  }
+
   render() {
     const {cart, updateItemQuantity, deleteItem} = this.props
 
@@ -38,7 +48,7 @@ class Cart extends Component {
                     key={cartItem.product.id}
                     cartItem={cartItem}
                     updateItemQuantity={updateItemQuantity}
-                    onQuantityUpdate={this.componentDidMount}
+                    updateCartTotal={this.updateCartTotal}
                     deleteItem={deleteItem}
                   />
                 )
