@@ -42,6 +42,7 @@ class OrderHistory extends Component {
               return (
                 <Order
                   key={singleOrder.id}
+                  orderId={singleOrder.id}
                   orderItem={singleOrder.product.title}
                   productId={singleOrder.product.id}
                   image={singleOrder.product.imageUrl}

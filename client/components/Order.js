@@ -1,8 +1,19 @@
 import React from 'react'
+import {connect} from 'react-redux'
 import {Button} from 'semantic-ui-react'
+import {updateOrderById} from '../store/order'
 
 const Order = props => {
-  const {productId, orderItem, image, price, quantity, status} = props
+  const {
+    orderId,
+    productId,
+    orderItem,
+    image,
+    price,
+    quantity,
+    status,
+    cancelOrder
+  } = props
   return (
     <div className="single-order">
       <div>
@@ -25,10 +36,16 @@ const Order = props => {
         </p>
       </div>
       <div>
-        <Button>Cancel Item</Button>
+        <Button onClick={() => cancelOrder({status: 'Canceled'}, orderId)}>
+          Cancel Item
+        </Button>
       </div>
     </div>
   )
 }
 
-export default Order
+const mapDispatchToProps = dispatch => ({
+  cancelOrder: (newOrderInfo, id) => dispatch(updateOrderById(newOrderInfo, id))
+})
+
+export default connect(null, mapDispatchToProps)(Order)

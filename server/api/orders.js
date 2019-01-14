@@ -1,7 +1,5 @@
 const router = require('express').Router()
 const Order = require('../db/models/order')
-// const OrderTotal = require('../db/models/orderTotal')
-// const Product = require('../db/models/product')
 module.exports = router
 
 const groupOrdersByTotal = usersOrders => {
