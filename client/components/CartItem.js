@@ -4,7 +4,7 @@ import {Button, Image, List} from 'semantic-ui-react'
 const CartItem = ({
   cartItem,
   updateItemQuantity,
-  onQuantityUpdate,
+  updateCartTotal,
   deleteItem
 }) => {
   const {product, quantity} = cartItem
@@ -20,7 +20,17 @@ const CartItem = ({
   return (
     <List.Item>
       <List.Content floated="right">
-        <Button onClick={() => deleteItem(product.id)}>Delete</Button>
+        <Button
+          onClick={async () => {
+            await deleteItem(product.id)
+
+            console.log('before Cart Total func')
+            updateCartTotal()
+            console.log('after Cart Total func')
+          }}
+        >
+          Delete
+        </Button>
       </List.Content>
       <Image size="tiny" src={product.imageUrl} />
       <List.Content>
@@ -30,7 +40,7 @@ const CartItem = ({
           defaultValue={quantity}
           onChange={event => {
             updateItemQuantity(product, Number(event.target.value))
-            onQuantityUpdate()
+            updateCartTotal()
           }}
         >
           {options}

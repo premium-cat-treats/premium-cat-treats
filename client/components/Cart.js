@@ -23,6 +23,16 @@ class Cart extends Component {
     this.setState({totalPriceCents})
   }
 
+  updateCartTotal = () => {
+    const {cart: cartItems} = this.props
+    const totalPriceCents = cartItems.reduce(
+      (total, item) => total + item.product.priceCents * item.quantity,
+      0
+    )
+
+    this.setState({totalPriceCents})
+  }
+
   render() {
     const {cart, updateItemQuantity, deleteItem} = this.props
 
@@ -38,14 +48,21 @@ class Cart extends Component {
                     key={cartItem.product.id}
                     cartItem={cartItem}
                     updateItemQuantity={updateItemQuantity}
-                    onQuantityUpdate={this.componentDidMount}
+                    updateCartTotal={this.updateCartTotal}
                     deleteItem={deleteItem}
                   />
                 )
               })}
             </List>
             <h3>Total: ${(this.state.totalPriceCents / 100).toFixed(2)}</h3>
-            <Button>Submit Order</Button>
+            <Button
+              onClick={() => {
+                // this.updateCartTotal()
+                console.log(this.state.totalPriceCents)
+              }}
+            >
+              Submit Order
+            </Button>
           </div>
         ) : (
           <h2>Your Shopping Cart is empty.</h2>
