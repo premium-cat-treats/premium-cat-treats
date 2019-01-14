@@ -44,7 +44,7 @@ class AddProductForm extends Component {
           <Form onSubmit={this.onFormSubmit}>
             <h3>Add New Product</h3>
 
-            <Form.Field>
+            <Form.Field required>
               <label>Product Title:</label>
               <input
                 name="title"
@@ -54,7 +54,7 @@ class AddProductForm extends Component {
                 placeholder="Title"
               />
             </Form.Field>
-            <Form.Field>
+            <Form.Field required>
               <label>Image</label>
               <input
                 name="imageUrl"
@@ -63,7 +63,7 @@ class AddProductForm extends Component {
                 placeholder="Image URL"
               />
             </Form.Field>
-            <Form.Field>
+            <Form.Field required>
               <label>Price</label>
               <input
                 name="priceCents"
@@ -72,7 +72,7 @@ class AddProductForm extends Component {
                 placeholder="Enter the Price"
               />
             </Form.Field>
-            <Form.Field>
+            <Form.Field required>
               <label>Quantity</label>
               <input
                 name="quantity"
@@ -81,7 +81,7 @@ class AddProductForm extends Component {
                 placeholder="Quantity"
               />
             </Form.Field>
-            <Form.Field>
+            <Form.Field required>
               <label>Description</label>
               <input
                 name="description"

@@ -4,30 +4,45 @@ import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {logout} from '../store'
 import DropDownMenu from './DropDownMenu'
+import {Icon} from 'semantic-ui-react'
 
 const Navbar = ({handleClick, isLoggedIn, user}) => (
   <div className="navbar">
     <Link to="/">
-      <h2>PREMIUM CAT TREATS</h2>
+      <h2>
+        <Icon name="paw" />PREMIUM CAT TREATS
+      </h2>
     </Link>
     <DropDownMenu />
     <nav>
       {isLoggedIn ? (
         <div>
           {/* The navbar will show these links after you log in */}
-          <Link to="/cart">Cart</Link>
-          <Link to="/admin">Admin</Link>
-          <Link to="/home">Home</Link>
+          <Link to="/cart">
+            <Icon name="cart" size="large" />
+          </Link>
+          <Link to="/admin/products">
+            <Icon name="clipboard" size="large" />
+          </Link>
+          <Link to="/home">
+            <Icon name="home" size="large" />
+          </Link>
           <a href="#" onClick={handleClick}>
-            Logout
+            <Icon name="log out" size="large" />
           </a>
         </div>
       ) : (
         <div>
           {/* The navbar will show these links before you log in */}
-          <Link to="/cart">Cart</Link>
-          <Link to="/login">Login</Link>
-          <Link to="/signup">Sign Up</Link>
+          <Link to="/cart">
+            <Icon name="cart" size="large" />
+          </Link>
+          <Link to="/login">
+            <Icon name="sign-in" size="large" />
+          </Link>
+          <Link to="/signup">
+            <Icon name="pencil alternate" size="large" />
+          </Link>
         </div>
       )}
     </nav>

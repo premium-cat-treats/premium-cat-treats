@@ -10,6 +10,10 @@ import ProductsInCategory from './components/ProductsInCategory'
 import AdminDashboard from './components/AdminDashboard'
 import Orders from './components/Orders'
 import Cart from './components/Cart'
+import AdminOrders from './components/AdminOrders'
+import AdminUsers from './components/AdminUsers'
+import AdminProducts from './components/AdminProducts'
+import ManageableUser from './components/ManageableUser'
 
 /**
  * COMPONENT
@@ -38,6 +42,14 @@ class Routes extends Component {
         {isLoggedIn && (
           <Switch>
             <Route exact path="/admin" component={AdminDashboard} />
+            <Route path="/admin/products" component={AdminProducts} />
+            <Route exact path="/admin/users" component={AdminUsers} />
+            <Route
+              exact
+              path="/admin/users/:userId"
+              component={ManageableUser}
+            />
+            <Route path="/admin/orders" component={AdminOrders} />
             {/* Routes placed here are only available after logging in */}
             <Route exact path="/home" component={AllProducts} />
             <Route exact path="/orders/:userId" component={Orders} />
