@@ -132,4 +132,20 @@ nav a {
   left: 0;
   top: 0;
   background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+}
+
+.message-container {
+  position: relative;
+  text-align: center;
+  background-color: white;
+  width: 50%;
+  height: 20%;
+  left: 25%;
+  bottom: 25%;
+  border: 1px solid #ccc;
+  box-shadow: 1px 1px 1px black;
+  padding: 16px;
+  transition: all 0.3s ease-out;
 }

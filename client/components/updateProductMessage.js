@@ -2,15 +2,19 @@ import React from 'react'
 import {Message, Button} from 'semantic-ui-react'
 
 const UpdateProductMessage = props => {
-  const {message} = props
-  return (
+  const {show, userMessage, messageToggle} = props
+  return show ? (
     <div className="backdrop">
-      <Message>
-        <Message.Header>{message}</Message.Header>
-      </Message>
-      <Button>OK</Button>
+      <div>
+        <Message className="message-container">
+          <Message.Header className="message" style={{marginBottom: '25px'}}>
+            {userMessage}
+          </Message.Header>
+          <Button onClick={messageToggle}>OK</Button>
+        </Message>
+      </div>
     </div>
-  )
+  ) : null
 }
 
 export default UpdateProductMessage
