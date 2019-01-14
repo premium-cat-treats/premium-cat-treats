@@ -23,10 +23,7 @@ const CartItem = ({
         <Button
           onClick={async () => {
             await deleteItem(product.id)
-
-            console.log('before Cart Total func')
             updateCartTotal()
-            console.log('after Cart Total func')
           }}
         >
           Delete

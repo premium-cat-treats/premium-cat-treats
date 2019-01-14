@@ -55,14 +55,7 @@ class Cart extends Component {
               })}
             </List>
             <h3>Total: ${(this.state.totalPriceCents / 100).toFixed(2)}</h3>
-            <Button
-              onClick={() => {
-                // this.updateCartTotal()
-                console.log(this.state.totalPriceCents)
-              }}
-            >
-              Submit Order
-            </Button>
+            <Button>Submit Order</Button>
           </div>
         ) : (
           <h2>Your Shopping Cart is empty.</h2>
