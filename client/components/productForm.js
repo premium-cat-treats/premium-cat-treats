@@ -1,12 +1,14 @@
 import React from 'react'
+import {Button} from 'semantic-ui-react'
 
 const ProductForm = props => {
   return (
     <div className="form">
       <form onSubmit={props.handleSubmit}>
         <div>
-          <div>
-            <label>Product Title:</label> <br />
+          <h3 style={{marginBottom: '10px'}}>Enter Updated Product Info</h3>
+          <div className="form-item">
+            <label className="form-header">Product Title:</label> <br />
             <input
               value={props.formData.title}
               onChange={props.handleChange}
@@ -16,8 +18,8 @@ const ProductForm = props => {
             />
           </div>
 
-          <div>
-            <label>Image:</label> <br />
+          <div className="form-item">
+            <label className="form-header">Image:</label> <br />
             <input
               value={props.formData.imageUrl}
               onChange={props.handleChange}
@@ -27,8 +29,8 @@ const ProductForm = props => {
             />
           </div>
 
-          <div>
-            <label>Price:</label> <br />
+          <div className="form-item">
+            <label className="form-header">Price:</label> <br />
             <input
               value={props.formData.priceCents}
               onChange={props.handleChange}
@@ -37,8 +39,9 @@ const ProductForm = props => {
               required
             />
           </div>
-          <div>
-            <label>Quantity:</label> <br />
+
+          <div className="form-item">
+            <label className="form-header">Quantity:</label> <br />
             <input
               value={props.formData.quantity}
               onChange={props.handleChange}
@@ -48,18 +51,22 @@ const ProductForm = props => {
             />
           </div>
 
-          <div>
-            <label>Description:</label> <br />
+          <div className="form-item">
+            <label className="form-header">Description:</label> <br />
             <textarea
               value={props.formData.description}
               onChange={props.handleChange}
               type="text"
               name="description"
+              rows="5"
+              cols="75"
             />
           </div>
 
           <br />
-          <button type="submit">Submit Product Info</button>
+          <Button type="submit" style={{color: '#5C9210'}}>
+            Submit Product Info
+          </Button>
         </div>
       </form>
     </div>

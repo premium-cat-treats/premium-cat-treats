@@ -34,7 +34,6 @@ class Product extends Component {
         {i + 1}
       </option>
     ))
-
     return (
       <Card>
         <Image src={product.imageUrl} />
@@ -46,7 +45,6 @@ class Product extends Component {
           <Card.Description>{product.description}</Card.Description>
         </Card.Content>
         <Card.Content extra>
-          <Icon name="paw" />
           <div>
             <select ref={`${product.id}-quantity-drop-down`} defaultValue="1">
               {options}
@@ -60,13 +58,14 @@ class Product extends Component {
               Add to Cart
             </button>
           </div>
-          <a>
+          <div>
             {this.props.user.adminAccess ? (
               <Link to={`/products/admin/${product.id}`}>
+                <Icon name="edit" />
                 Edit this Product
               </Link>
             ) : null}
-          </a>
+          </div>
         </Card.Content>
       </Card>
     )
