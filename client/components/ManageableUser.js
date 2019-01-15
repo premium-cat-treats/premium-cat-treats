@@ -1,7 +1,8 @@
 import React, {Component} from 'react'
 import {fetchUsers, updateUserById} from '../store/user'
 import {connect} from 'react-redux'
-import {Icon, Button} from 'semantic-ui-react'
+import {Icon, Button, Card} from 'semantic-ui-react'
+import AdminDashboard from './AdminDashboard'
 
 class ManageableUser extends Component {
   componentDidMount() {
@@ -26,29 +27,39 @@ class ManageableUser extends Component {
 
     return user ? (
       <div>
+        <AdminDashboard />
         <h1>USER INFO</h1>
 
-        <h3>
-          <Icon name="address card" />
-          {user.email}
-        </h3>
-
-        <Button
-          toggle
-          active={user.adminAccess}
-          icon="clipboard"
-          label="Admin"
-          onClick={() => this.changeAdmin(user.id, user)}
-        />
-
-        <h5>{`Created On: ${user.createdAt}`}</h5>
-
-        <Button
-          onClick={() => this.deleteUser(user.id, user)}
-          style={{color: '#944317'}}
-        >
-          Delete this User
-        </Button>
+        <Card.Group>
+          <Card>
+            <Card.Content>
+              <Card.Header>
+                <Icon name="address card" />
+                {user.email}
+              </Card.Header>
+              <Card.Meta>{`Created On: ${user.createdAt}`}</Card.Meta>
+              <Card.Description>
+                <Button
+                  toggle
+                  active={user.adminAccess}
+                  icon="clipboard"
+                  label="Admin"
+                  onClick={() => this.changeAdmin(user.id, user)}
+                />
+              </Card.Description>
+            </Card.Content>
+            <Card.Content extra>
+              <div className="ui two buttons">
+                <Button
+                  onClick={() => this.deleteUser(user.id, user)}
+                  color="red"
+                >
+                  Delete this User
+                </Button>
+              </div>
+            </Card.Content>
+          </Card>
+        </Card.Group>
       </div>
     ) : null
   }

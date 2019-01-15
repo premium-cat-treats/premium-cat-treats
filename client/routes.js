@@ -24,7 +24,7 @@ class Routes extends Component {
   }
 
   render() {
-    const {isLoggedIn, isAdmin} = this.props
+    const {isLoggedIn} = this.props
 
     return (
       <Switch>
@@ -52,6 +52,7 @@ class Routes extends Component {
                 component={ManageableUser}
               />
               <Route exact path="/orders/:userId" component={Orders} />
+              <Route exact path="admin/orders/:userId" component={Orders} />
               <Route path="/admin/orders" component={AdminOrders} />
             </Switch>
           )}
