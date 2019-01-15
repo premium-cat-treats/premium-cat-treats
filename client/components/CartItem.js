@@ -1,12 +1,7 @@
 import React from 'react'
 import {Button, Image, List} from 'semantic-ui-react'
 
-const CartItem = ({
-  cartItem,
-  updateItemQuantity,
-  onQuantityUpdate,
-  deleteItem
-}) => {
+const CartItem = ({cartItem, updateItemQuantity, deleteItem}) => {
   const {product, quantity} = cartItem
   // Creates a dynamic array of options based on current product quantity.
   const quantityOptions = new Array(product.quantity)
@@ -28,10 +23,9 @@ const CartItem = ({
         || Price: ${product.priceCents / 100} || Quantity:
         <select
           defaultValue={quantity}
-          onChange={event => {
+          onChange={event =>
             updateItemQuantity(product, Number(event.target.value))
-            onQuantityUpdate()
-          }}
+          }
         >
           {options}
         </select>
