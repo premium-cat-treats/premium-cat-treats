@@ -48,7 +48,6 @@ export const postOrder = (totalCents, arrayOfCartItems, userId) => {
       const {data: orderData} = await axios.post('/api/order/', itemData)
       return orderData
     })
-    console.log(orders)
   }
 }
 
