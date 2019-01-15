@@ -28,3 +28,18 @@ router.get('/:userId', async (req, res, next) => {
     next(error)
   }
 })
+
+router.get('/placed/:orderTotalId', async (req, res, next) => {
+  try {
+    const orders = await Order.findAll({
+      where: {
+        orderTotalId: req.params.orderTotalId
+      },
+      include: [{all: true}]
+    })
+    const userOrders = groupOrdersByTotal(orders)
+    res.status(200).json(userOrders)
+  } catch (error) {
+    next(error)
+  }
+})

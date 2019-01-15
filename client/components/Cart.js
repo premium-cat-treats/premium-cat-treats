@@ -8,6 +8,7 @@ import {postOrder} from '../store/order'
 class Cart extends Component {
   render() {
     const {cart} = this.props
+    console.log('props: ', this.props)
 
     return (
       <div>
@@ -28,13 +29,14 @@ class Cart extends Component {
             </List>
             <h3>Total: ${(this.props.totalPriceCents / 100).toFixed(2)}</h3>
             <Button
-              onClick={() =>
-                this.props.postOrder(
+              onClick={async () => {
+                const orderId = await this.props.postOrder(
                   this.props.totalPriceCents,
                   cart,
                   this.props.user.id
                 )
-              }
+                this.props.history.push(`/order-confirmation/${orderId}`)
+              }}
             >
               Submit Order
             </Button>
