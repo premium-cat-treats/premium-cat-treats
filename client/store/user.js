@@ -8,6 +8,7 @@ const GET_USER = 'GET_USER'
 const REMOVE_USER = 'REMOVE_USER'
 const GET_ALL_USERS = 'GET_ALL_USERS'
 const GOT_USER_INFO = 'GOT_USER_INFO'
+const GOT_UPDATED_USER = 'GOT_UPDATED_USER'
 
 /**
  * INITIAL STATE
@@ -22,6 +23,10 @@ const getUser = user => ({type: GET_USER, user})
 const removeUser = () => ({type: REMOVE_USER})
 const getAllUsers = users => ({type: GET_ALL_USERS, users})
 const gotUserInfo = userInfo => ({type: GOT_USER_INFO, userInfo})
+const gotUpdatedUser = updatedUser => ({
+  type: GOT_UPDATED_USER,
+  updatedUser
+})
 
 /**
  * THUNK CREATORS
@@ -43,6 +48,20 @@ export const fetchSingleUser = userId => {
     try {
       const {data: user} = await axios.get(`/api/users/${userId}`)
       dispatch(gotUserInfo(user))
+    } catch (error) {
+      console.error(error)
+    }
+  }
+}
+
+export const updateUserById = (newUserInfo, userId) => {
+  return async dispatch => {
+    try {
+      const {data: updatedUser} = await axios.put(
+        `/api/users/${userId}`,
+        newUserInfo
+      )
+      dispatch(gotUpdatedUser(updatedUser))
     } catch (error) {
       console.error(error)
     }
@@ -104,6 +123,11 @@ export const users = (state = defaultUsers, action) => {
       return action.users
     case GOT_USER_INFO:
       return action.userInfo
+    case GOT_UPDATED_USER:
+      const updatedUser = state.map(
+        user => (user.id === action.updatedUser.id ? action.updatedUser : user)
+      )
+      return updatedUser
     default:
       return state
   }

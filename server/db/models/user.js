@@ -29,7 +29,13 @@ const User = db.define('user', {
   },
   adminAccess: {
     type: Sequelize.BOOLEAN,
-    defaultValue: false
+    defaultValue: false,
+    allowNull: false
+  },
+  deleted: {
+    type: Sequelize.BOOLEAN,
+    defaultValue: false,
+    allowNull: false
   }
 })
 
