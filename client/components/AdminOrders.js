@@ -19,6 +19,7 @@ const steps = [
   {key: 'confirm', disabled: true, icon: 'info', title: 'Confirm Order'}
 ]
 class AdminOrders extends Component {
+  componentDidMount() {}
   render() {
     return (
       <div>

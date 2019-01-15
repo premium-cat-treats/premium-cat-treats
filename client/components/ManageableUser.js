@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import {fetchUsers, updateUserById} from '../store/user'
 import {connect} from 'react-redux'
 import {Icon, Button, Card} from 'semantic-ui-react'
+import AdminDashboard from './AdminDashboard'
 
 class ManageableUser extends Component {
   componentDidMount() {
@@ -26,6 +27,7 @@ class ManageableUser extends Component {
 
     return user ? (
       <div>
+        <AdminDashboard />
         <h1>USER INFO</h1>
 
         <Card.Group>
