@@ -57,14 +57,11 @@ export const fetchSingleUser = userId => {
 export const updateUserById = (newUserInfo, userId) => {
   return async dispatch => {
     try {
-      console.log('before axios')
       const {data: updatedUser} = await axios.put(
         `/api/users/${userId}`,
         newUserInfo
       )
-      console.log('indamiddle')
       dispatch(gotUpdatedUser(updatedUser))
-      console.log('after axios')
     } catch (error) {
       console.error(error)
     }
