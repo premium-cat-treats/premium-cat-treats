@@ -4,11 +4,6 @@ import ManageableProduct from './manageableProduct'
 import {fetchProducts, deleteProductById} from '../store/product'
 //TODO: show conditionally in navbar
 class AdminProducts extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {}
-  }
-
   componentDidMount() {
     this.props.fetchProducts()
   }
