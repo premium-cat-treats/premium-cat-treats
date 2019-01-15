@@ -36,7 +36,7 @@ class Product extends Component {
     ))
     return !product.deleted ? (
       <Card>
-        <Image src={product.imageUrl} />
+        <Image size="small" src={product.imageUrl} centered />
         <Card.Content>
           <Card.Header>{product.title}</Card.Header>
           <Card.Meta>
