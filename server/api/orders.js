@@ -14,15 +14,6 @@ const groupOrdersByTotal = usersOrders => {
   return groupedOrders
 }
 
-router.get('/', async (req, res, next) => {
-  try {
-    const orders = await Order.findAll()
-    res.json(orders)
-  } catch (error) {
-    next(error)
-  }
-})
-
 router.get('/:userId', async (req, res, next) => {
   try {
     const orders = await Order.findAll({
