@@ -60,20 +60,3 @@ describe('CartItem', () => {
     expect(instance.props.cartItem.product).to.equal(cartItem.product)
   })
 })
-
-// describe('CartItem', () => {
-//   let cartItem
-
-//   beforeEach(() => {
-//     cartItem = shallow(<CartItem cartItemInfo={cartItemInfo} />)
-//   })
-
-//   it('should have props for title and quantity', () => {
-//     expect(cartItem.props().cartItemInfo.product.title).to.equal('KittyKat');
-//     // expect(cartItem.props().src).to.be.defined;
-//   })
-
-//   // it('should have props for title and quantity', () => {
-//   //   expect(cartItem.find('h3').text()).to.be.equal('Welcome, cody@email.com')
-//   // })
-// })
