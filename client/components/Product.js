@@ -40,7 +40,9 @@ class Product extends Component {
         <Card.Content>
           <Card.Header>{product.title}</Card.Header>
           <Card.Meta>
-            <span className="price">${product.priceCents / 100}</span>
+            <span className="price">
+              ${(product.priceCents / 100).toFixed(2)}
+            </span>
           </Card.Meta>
           <Card.Description>{product.description}</Card.Description>
         </Card.Content>

@@ -15,12 +15,18 @@ async function seed() {
 
   const users = await Promise.all([
     User.create({email: 'cody@email.com', password: '111', adminAccess: true}),
-    User.create({email: 'murphy@email.com', password: '111'})
+    User.create({email: 'murphy@email.com', password: '111'}),
+    User.create({email: 'tom@email.com', password: '111'}),
+    User.create({email: 'lion@email.com', password: '111'}),
+    User.create({email: 'socks@email.com', password: '111'}),
+    User.create({email: 'nala@email.com', password: '111'}),
+    User.create({email: 'simba@email.com', password: '111'})
   ])
 
   const categories = await Promise.all([
     Category.create({title: 'Savory Purrrfection'}),
-    Category.create({title: 'Foreign Foods for Furry Felines'})
+    Category.create({title: 'Foreign Foods for Furry Felines'}),
+    Category.create({title: 'Crazy Catnips'})
   ])
 
   const products = await Promise.all([
@@ -37,11 +43,57 @@ async function seed() {
         'Low fat, traditional Indian dish that’s light and flavorful almond curry made with tomato paste, plenty of spices and cream thats buttery and completely purrrrfect',
       priceCents: 599,
       quantity: 50
+    }),
+    Product.create({
+      title: 'Royal Canin Veterinary Diet',
+      description:
+        'The most common cause of Lower Urinary Tract Disease in cats is idiopathic cystitis.This diet promotes a urinary environment unfavorable to the development of both struvite and calcium oxalate crystals.',
+      priceCents: 250,
+      quantity: 10
+    }),
+    Product.create({
+      title: 'Fancy Feast',
+      description:
+        'Make dinner a black tie optional affair with the Fancy Feast Grilled Seafood Feast Variety Pack. With a delicious combo of your cat’s favorite flavors, this gourmet food features tender cuts of seafood that are slow-cooked to perfection in a savory gravy.',
+      priceCents: 400,
+      quantity: 30
+    }),
+    Product.create({
+      title: 'Meow Mix',
+      description:
+        'Meow Mix Original Choice Dry Cat Food is specially formulated to help adult cats stay healthy and happy. To maintain wellness throughout adulthood, fully grown cats need the proper nutrition to keep them in top shape as they age.',
+      priceCents: 199,
+      quantity: 5
+    }),
+    Product.create({
+      title: 'Kit & Kaboodle',
+      description: `Taste? Kit & Kaboodle Original Dry Cat Food has got it. A lip-smackin' combination of four cat-pleasing flavors—chicken, liver, turkey and ocean fish. Variety? Oh, yeah. Four flavors and four fun shapes... no "bowl boredom" happening here! Nutrition? You know it.`,
+      priceCents: 399,
+      quantity: 18
+    }),
+    Product.create({
+      title: 'Meowy Wowie Catnip',
+      description:
+        'Give your favorite feline something to purr about with Meowijuana Meowi-Waui Catnip. These convenient, eco-friendly containers are full of premium catnip, trimmed and picked by hand at the peak of essential oil production—creating the most radical catnip on the market.',
+      priceCents: 420,
+      quantity: 18
+    }),
+    Product.create({
+      title: 'Northern Lights Meowijauna Catnip',
+      description: `Treat your kitty to catnip so good it should be illegal with Meowijuana Jar of Buds Catnip. These trimmed catnip buds will invoke the reaction in your cat that only catnip can; providing a happy, euphoric experience for your favorite furry friend.`,
+      priceCents: 420,
+      quantity: 18
     })
   ])
 
   await products[0].addCategory(categories[0])
   await products[1].addCategory(categories[1])
+  await products[2].addCategory(categories[0])
+  await products[3].addCategory(categories[0])
+  await products[4].addCategory(categories[1])
+  await products[5].addCategory(categories[1])
+  await products[6].addCategory(categories[2])
+  await products[7].addCategory(categories[2])
 
   const total1 = await OrderTotal.create({
     totalCents: 299 * 4 + 599 * 2
