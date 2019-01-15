@@ -14,6 +14,14 @@ const Order = props => {
     status,
     cancelOrder
   } = props
+  const statusStyle =
+    status === 'Canceled'
+      ? {display: 'inline-block', color: '#944317'}
+      : status === 'Completed'
+        ? {display: 'inline-block', color: '#5C9210'}
+        : status === 'Processing'
+          ? {display: 'inline-block', color: '#F4A460'}
+          : {display: 'inline-block', color: 'black'}
   return (
     <div className="single-order">
       <div>
@@ -30,10 +38,12 @@ const Order = props => {
           <strong>Qty: </strong>
           {quantity}
         </p>
-        <p className="single-order-paragraph">
-          <strong>Status: </strong>
-          {status}
-        </p>
+        <div className="single-order-paragraph">
+          <p style={{display: 'inline-block', marginRight: '.5rem'}}>
+            <strong>Status: </strong>
+          </p>
+          <p style={statusStyle}>{status}</p>
+        </div>
       </div>
       <div>
         <Button onClick={() => cancelOrder({status: 'Canceled'}, orderId)}>

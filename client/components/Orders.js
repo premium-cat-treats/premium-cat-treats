@@ -36,7 +36,7 @@ class OrderHistory extends Component {
             </p>
             <p style={{fontSize: '16px'}}>
               <strong>Order Placed: </strong>
-              {ords[key][0].orderTotal.orderDate}
+              {ords[key][0].orderTotal.orderDate.slice(0, 10)}
             </p>
             {ords[key].map(singleOrder => {
               return (

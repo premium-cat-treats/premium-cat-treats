@@ -1,6 +1,5 @@
 const Sequelize = require('sequelize')
 const db = require('../db')
-var ta = require('time-ago')
 
 const OrderTotal = db.define('orderTotal', {
   totalCents: {
@@ -11,13 +10,10 @@ const OrderTotal = db.define('orderTotal', {
     }
   },
   orderDate: {
-    type: Sequelize.STRING,
-    allowNull: false
+    type: Sequelize.DATE,
+    allowNull: false,
+    defaultValue: Sequelize.NOW
   }
-})
-
-OrderTotal.beforeValidate(orderTotal => {
-  orderTotal.orderDate = ta.today()
 })
 
 module.exports = OrderTotal
