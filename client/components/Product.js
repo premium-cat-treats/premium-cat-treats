@@ -35,39 +35,43 @@ class Product extends Component {
       </option>
     ))
     return !product.deleted ? (
-      <Card>
-        <Image src={product.imageUrl} />
-        <Card.Content>
-          <Card.Header>{product.title}</Card.Header>
-          <Card.Meta>
-            <span className="price">${product.priceCents / 100}</span>
-          </Card.Meta>
-          <Card.Description>{product.description}</Card.Description>
-        </Card.Content>
-        <Card.Content extra>
-          <div>
-            <select ref={`${product.id}-quantity-drop-down`} defaultValue="1">
-              {options}
-            </select>
-            {/* Button disables if the user already has already placed all available items in stock into their cart. */}
-            <button
-              type="button"
-              disabled={product.quantity - cartItemQuantity ? '' : 'true'}
-              onClick={() => this.handleSubmit(product)}
-            >
-              Add to Cart
-            </button>
-          </div>
-          <div>
-            {this.props.user.adminAccess ? (
-              <Link to={`/products/admin/${product.id}`}>
-                <Icon name="edit" />
-                Edit this Product
-              </Link>
-            ) : null}
-          </div>
-        </Card.Content>
-      </Card>
+      <div className="product-card">
+        <Card>
+          <Image src={product.imageUrl} />
+          <Card.Content>
+            <Card.Header>{product.title}</Card.Header>
+            <Card.Meta>
+              <span className="price">
+                ${(product.priceCents / 100).toFixed(2)}
+              </span>
+            </Card.Meta>
+            <Card.Description>{product.description}</Card.Description>
+          </Card.Content>
+          <Card.Content extra>
+            <div>
+              <select ref={`${product.id}-quantity-drop-down`} defaultValue="1">
+                {options}
+              </select>
+              {/* Button disables if the user already has already placed all available items in stock into their cart. */}
+              <button
+                type="button"
+                disabled={product.quantity - cartItemQuantity ? '' : 'true'}
+                onClick={() => this.handleSubmit(product)}
+              >
+                Add to Cart
+              </button>
+            </div>
+            <div>
+              {this.props.user.adminAccess ? (
+                <Link to={`/products/admin/${product.id}`}>
+                  <Icon name="edit" />
+                  Edit this Product
+                </Link>
+              ) : null}
+            </div>
+          </Card.Content>
+        </Card>
+      </div>
     ) : null
   }
 }

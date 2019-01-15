@@ -149,3 +149,13 @@ nav a {
   padding: 16px;
   transition: all 0.3s ease-out;
 }
+
+.product-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+
+.product-card {
+  margin: 10px;
+}
