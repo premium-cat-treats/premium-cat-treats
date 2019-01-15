@@ -23,7 +23,7 @@ router.get('/:userId', async (req, res, next) => {
       include: [{all: true}]
     })
     const userOrders = groupOrdersByTotal(orders)
-    res.json(userOrders)
+    res.status(200).json(userOrders)
   } catch (error) {
     next(error)
   }
