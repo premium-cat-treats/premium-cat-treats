@@ -43,7 +43,7 @@ class Routes extends Component {
                 path="/products/admin/:productId"
                 component={ManageableProduct}
               />
-              <Route exact path="/admin" component={AdminDashboard} />
+              <Route exact path="/admin" component={AdminProducts} />
               <Route path="/admin/products" component={AdminProducts} />
               <Route exact path="/admin/users" component={AdminUsers} />
               <Route
