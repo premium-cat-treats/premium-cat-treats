@@ -25,6 +25,7 @@ class User extends Component {
           <Link to={`/admin/users/${user.id}`}>
             <Icon name="edit" /> Edit this User
           </Link>
+          <Link to={`admin/orders/${user.Id}`}>User Order History</Link>
         </Card.Content>
       </Card>
     ) : null

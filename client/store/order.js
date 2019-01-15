@@ -1,5 +1,4 @@
 import axios from 'axios'
-import order from '../components/order'
 
 const GOT_ORDERS = 'GOT_ORDERS'
 const GOT_UPDATED_ORDER = 'GOT_UPDATED_ORDER'

@@ -1,6 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {Button} from 'semantic-ui-react'
+import {Button, Dropdown} from 'semantic-ui-react'
 import {updateOrderById} from '../store/order'
 
 const Order = props => {
@@ -12,8 +12,16 @@ const Order = props => {
     price,
     quantity,
     status,
-    cancelOrder
+    cancelOrder,
+    user
   } = props
+
+  const statusOptions = [
+    {key: 'Cr', value: 'Created', text: 'Created'},
+    {key: 'Pr', value: 'Processing', text: 'Pr'},
+    {key: 'Ca', value: 'Canceled', text: 'Ca'},
+    {key: 'Co', value: 'Completed', text: 'Completed'}
+  ]
   const statusStyle =
     status === 'Canceled'
       ? {display: 'inline-block', color: '#944317'}
@@ -46,9 +54,19 @@ const Order = props => {
         </div>
       </div>
       <div>
-        <Button onClick={() => cancelOrder({status: 'Canceled'}, orderId)}>
-          Cancel Item
-        </Button>
+        {user.adminAcess ? (
+          <Dropdown
+            onChange={() => props.handleStatusChange(event, orderId)}
+            placeholder="Order Status"
+            search
+            selection
+            options={statusOptions}
+          />
+        ) : (
+          <Button onClick={() => cancelOrder({status: 'Canceled'}, orderId)}>
+            Cancel Item
+          </Button>
+        )}
       </div>
     </div>
   )
