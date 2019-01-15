@@ -5,13 +5,18 @@ import {Link} from 'react-router-dom'
 class User extends Component {
   render() {
     const {user} = this.props
-    return (
+    console.log(user)
+    return !user.deleted ? (
       <Card>
         <Card.Content>
           <Card.Header>{user.email}</Card.Header>
           <Card.Meta>
             <span className="Admin">
-              {user.adminAccess ? <div>'Admin'</div> : null}
+              {user.adminAccess ? (
+                <div>
+                  <Icon name="clipboard" />Admin
+                </div>
+              ) : null}
             </span>
           </Card.Meta>
           <Card.Description>{user.email}</Card.Description>
@@ -22,7 +27,7 @@ class User extends Component {
           </Link>
         </Card.Content>
       </Card>
-    )
+    ) : null
   }
 }
 

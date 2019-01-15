@@ -20,29 +20,32 @@ const Navbar = ({handleClick, isLoggedIn, user}) => (
           {/* The navbar will show these links after you log in */}
           <Link to="/cart">
             <Icon name="cart" size="large" />
+            Cart
           </Link>
           <Link to="/admin/products">
-            <Icon name="clipboard" size="large" />
+            <Icon name="clipboard" size="large" />Admin
           </Link>
           <Link to="/home">
-            <Icon name="home" size="large" />
+            <Icon name="home" size="large" />Home
           </Link>
-          <Link to={`/orders/${user.id}`}>Orders</Link>
+          <Link to={`/orders/${user.id}`}>
+            <Icon name="shopping bag" size="large" />Orders
+          </Link>
           <a href="#" onClick={handleClick}>
-            <Icon name="log out" size="large" />
+            <Icon name="log out" size="large" />Log Out
           </a>
         </div>
       ) : (
         <div>
           {/* The navbar will show these links before you log in */}
           <Link to="/cart">
-            <Icon name="cart" size="large" />
+            <Icon name="cart" size="large" />Cart
           </Link>
           <Link to="/login">
-            <Icon name="sign-in" size="large" />
+            <Icon name="sign-in" size="large" />Log In
           </Link>
           <Link to="/signup">
-            <Icon name="pencil alternate" size="large" />
+            <Icon name="pencil alternate" size="large" />Sign Up
           </Link>
         </div>
       )}

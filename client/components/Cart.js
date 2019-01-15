@@ -2,39 +2,11 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import CartItem from './CartItem'
 import {List, Button} from 'semantic-ui-react'
-import {updateItemQuantity, deleteItem} from '../store/cart'
+import {updateItemQuantity, deleteItem, totalPriceCents} from '../store/cart'
 
 class Cart extends Component {
-  constructor() {
-    super()
-
-    this.state = {
-      totalPriceCents: 0
-    }
-  }
-
-  componentDidMount = () => {
-    const {cart: cartItems} = this.props
-    const totalPriceCents = cartItems.reduce(
-      (total, item) => total + item.product.priceCents * item.quantity,
-      0
-    )
-
-    this.setState({totalPriceCents})
-  }
-
-  updateCartTotal = () => {
-    const {cart: cartItems} = this.props
-    const totalPriceCents = cartItems.reduce(
-      (total, item) => total + item.product.priceCents * item.quantity,
-      0
-    )
-
-    this.setState({totalPriceCents})
-  }
-
   render() {
-    const {cart, updateItemQuantity, deleteItem} = this.props
+    const {cart} = this.props
 
     return (
       <div>
@@ -47,14 +19,13 @@ class Cart extends Component {
                   <CartItem
                     key={cartItem.product.id}
                     cartItem={cartItem}
-                    updateItemQuantity={updateItemQuantity}
-                    updateCartTotal={this.updateCartTotal}
-                    deleteItem={deleteItem}
+                    updateItemQuantity={this.props.updateItemQuantity}
+                    deleteItem={this.props.deleteItem}
                   />
                 )
               })}
             </List>
-            <h3>Total: ${(this.state.totalPriceCents / 100).toFixed(2)}</h3>
+            <h3>Total: ${(this.props.totalPriceCents / 100).toFixed(2)}</h3>
             <Button>Submit Order</Button>
           </div>
         ) : (
@@ -67,7 +38,8 @@ class Cart extends Component {
 
 const mapStateToProps = state => ({
   cart: state.cart,
-  user: state.user
+  user: state.user,
+  totalPriceCents: totalPriceCents(state)
 })
 
 const mapDispatchToProps = dispatch => ({
