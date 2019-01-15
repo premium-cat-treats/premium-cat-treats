@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {fetchUsers, updateUserById} from '../store/user'
 import {connect} from 'react-redux'
-import {Icon, Button, Radio} from 'semantic-ui-react'
+import {Icon, Button} from 'semantic-ui-react'
 
 class ManageableUser extends Component {
   componentDidMount() {
@@ -11,7 +11,6 @@ class ManageableUser extends Component {
   deleteUser = (id, user) => {
     user.deleted = true
     this.props.updateUser(user, id)
-    console.log(this.props.history)
     this.props.history.push('/admin/users')
   }
 

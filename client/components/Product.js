@@ -34,7 +34,7 @@ class Product extends Component {
         {i + 1}
       </option>
     ))
-    return (
+    return !product.deleted ? (
       <Card>
         <Image src={product.imageUrl} />
         <Card.Content>
@@ -68,7 +68,7 @@ class Product extends Component {
           </div>
         </Card.Content>
       </Card>
-    )
+    ) : null
   }
 }
 
