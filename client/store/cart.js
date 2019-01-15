@@ -50,3 +50,12 @@ export const cartReducer = (state = [], action) => {
       return state
   }
 }
+
+// Selector function
+export const totalPriceCents = state => {
+  return state.cart.reduce(
+    (total, cartItem) =>
+      total + cartItem.product.priceCents * cartItem.quantity,
+    0
+  )
+}
