@@ -57,11 +57,14 @@ export const fetchSingleUser = userId => {
 export const updateUserById = (newUserInfo, userId) => {
   return async dispatch => {
     try {
+      console.log('before axios')
       const {data: updatedUser} = await axios.put(
         `/api/users/${userId}`,
         newUserInfo
       )
+      console.log('indamiddle')
       dispatch(gotUpdatedUser(updatedUser))
+      console.log('after axios')
     } catch (error) {
       console.error(error)
     }
@@ -124,10 +127,10 @@ export const users = (state = defaultUsers, action) => {
     case GOT_USER_INFO:
       return action.userInfo
     case GOT_UPDATED_USER:
-      const updatedUsers = state.map(
+      const updatedUser = state.map(
         user => (user.id === action.updatedUser.id ? action.updatedUser : user)
       )
-      return updatedUsers
+      return updatedUser
     default:
       return state
   }

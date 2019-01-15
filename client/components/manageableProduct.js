@@ -29,7 +29,7 @@ class ManageableProduct extends Component {
 
   deleteProduct = id => {
     this.props.updateProduct({deleted: true}, id)
-    this.props.history.push('/products')
+    this.props.history.push('/admin/products')
   }
 
   handleChange = event => {

@@ -11,7 +11,11 @@ class User extends Component {
           <Card.Header>{user.email}</Card.Header>
           <Card.Meta>
             <span className="Admin">
-              {user.adminAccess ? <div>'Admin'</div> : null}
+              {user.adminAccess ? (
+                <div>
+                  <Icon name="clipboard" />Admin
+                </div>
+              ) : null}
             </span>
           </Card.Meta>
           <Card.Description>{user.email}</Card.Description>
