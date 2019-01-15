@@ -15,3 +15,25 @@ router.put('/:orderId', async (req, res, next) => {
     next(error)
   }
 })
+
+router.post('/', async (req, res, next) => {
+  try {
+    const {
+      historicalPriceCents,
+      quantityOrdered,
+      productId,
+      userId,
+      orderTotalId
+    } = req.body
+    const orderedItem = await Order.create({
+      historicalPriceCents,
+      quantityOrdered,
+      userId,
+      productId,
+      orderTotalId
+    })
+    res.status(201).json(orderedItem)
+  } catch (error) {
+    next(error)
+  }
+})
