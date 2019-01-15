@@ -43,7 +43,6 @@ describe('Order routes', () => {
       const res = await request(app)
         .get('/api/orders/1')
         .expect(200)
-      console.log(res.body)
       expect(res.body).to.be.an('object')
       expect(res.body.group1).to.be.an('array')
       expect(res.body.group1[0].status).to.be.equal('Created')
