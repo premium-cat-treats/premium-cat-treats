@@ -1,4 +1,5 @@
 import axios from 'axios'
+import order from '../components/order'
 
 const GOT_ORDERS = 'GOT_ORDERS'
 const GOT_UPDATED_ORDER = 'GOT_UPDATED_ORDER'
@@ -27,6 +28,26 @@ export const updateOrderById = (newOrderInfo, id) => {
       newOrderInfo
     )
     dispatch(gotUpdatedOrder(updatedOrder))
+  }
+}
+
+export const postOrder = (totalCents, arrayOfCartItems, userId) => {
+  return async dispatch => {
+    const {data: orderTotal} = await axios.post('/api/order-total/', {
+      totalCents
+    })
+    console.log(orderTotal)
+    const orders = arrayOfCartItems.map(async item => {
+      const itemData = {
+        historicalPriceCents: item.product.priceCents,
+        quantityOrdered: item.quantity,
+        productId: item.product.id,
+        userId: userId,
+        orderTotalId: orderTotal.id
+      }
+      const {data: orderData} = await axios.post('/api/order/', itemData)
+      return orderData
+    })
   }
 }
 
