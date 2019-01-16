@@ -1,5 +1,5 @@
 import React from 'react'
-import Order from './components/order'
+import Order from './components/Order'
 
 // Creates grouped order section for OrderConfirmations.js
 export const createOrderSections = ords => {
