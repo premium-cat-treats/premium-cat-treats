@@ -22,13 +22,6 @@ class AdminUserMenu extends Component {
           />
           <Menu.Item
             as={Link}
-            to="/admin/orders"
-            name="orders"
-            active={activeItem === 'orders'}
-            onClick={this.handleItemClick}
-          />
-          <Menu.Item
-            as={Link}
             to="/admin/users"
             name="users"
             active={activeItem === 'users'}

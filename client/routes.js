@@ -10,7 +10,6 @@ import ProductsInCategory from './components/ProductsInCategory'
 import AdminDashboard from './components/AdminDashboard'
 import Orders from './components/Orders'
 import Cart from './components/Cart'
-import AdminOrders from './components/AdminOrders'
 import AdminUsers from './components/AdminUsers'
 import AdminProducts from './components/AdminProducts'
 import ManageableUser from './components/ManageableUser'
@@ -62,7 +61,6 @@ class Routes extends Component {
                 path="/admin/edit-order/:userId"
                 component={Orders}
               />
-              <Route path="/admin/orders" component={AdminOrders} />
             </Switch>
           )}
         {isLoggedIn && (

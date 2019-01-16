@@ -3,8 +3,17 @@ import {fetchUsers, updateUserById} from '../store/user'
 import {connect} from 'react-redux'
 import {Icon, Button, Card} from 'semantic-ui-react'
 import AdminDashboard from './AdminDashboard'
+import UpdateProductMessage from './UpdateProductMessage'
 
 class ManageableUser extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      messageIsShowing: false,
+      message: ''
+    }
+  }
+
   componentDidMount() {
     this.props.fetchUsers()
   }
@@ -12,12 +21,20 @@ class ManageableUser extends Component {
   deleteUser = (id, user) => {
     user.deleted = true
     this.props.updateUser(user, id)
-    this.props.history.push('/admin/users')
+    this.setState({
+      messageIsShowing: true,
+      message: 'User successfully deleted'
+    })
   }
 
   changeAdmin = (id, user) => {
     user.adminAccess = !user.adminAccess
     this.props.updateUser(user, id)
+  }
+
+  toggleMessageOff = () => {
+    this.setState({messageIsShowing: false})
+    this.props.history.push('/admin/users')
   }
 
   render() {
@@ -27,9 +44,13 @@ class ManageableUser extends Component {
 
     return user ? (
       <div>
+        <UpdateProductMessage
+          show={this.state.messageIsShowing}
+          userMessage={this.state.message}
+          messageToggle={this.toggleMessageOff}
+        />
         <AdminDashboard />
         <h1>USER INFO</h1>
-
         <Card.Group>
           <Card>
             <Card.Content>
