@@ -34,6 +34,11 @@ class AddProductForm extends Component {
       }
       this.props.postNewProduct(newProduct)
       this.setState({
+        title: '',
+        description: '',
+        priceCents: '',
+        quantity: '',
+        imageUrl: '',
         messageIsShowing: true,
         message: 'Product successfully created'
       })
@@ -46,6 +51,7 @@ class AddProductForm extends Component {
       [evt.target.name]: evt.target.value
     })
   }
+
   render() {
     const {handleClose} = this.props
     const {title, description, priceCents, quantity, imageUrl} = this.state
@@ -59,7 +65,6 @@ class AddProductForm extends Component {
         <Segment>
           <Form onSubmit={this.onFormSubmit}>
             <h3>Add New Product</h3>
-
             <Form.Field required>
               <label>Product Title:</label>
               <input
@@ -70,17 +75,18 @@ class AddProductForm extends Component {
                 placeholder="Title"
               />
             </Form.Field>
-            <Form.Field required>
+            <Form.Field>
               <label>Image</label>
               <input
                 name="imageUrl"
                 onChange={this.onInputChange}
                 value={imageUrl}
+                type="url"
                 placeholder="Image URL"
               />
             </Form.Field>
             <Form.Field required>
-              <label>Price</label>
+              <label>Price without decimal</label>
               <input
                 name="priceCents"
                 onChange={this.onInputChange}
