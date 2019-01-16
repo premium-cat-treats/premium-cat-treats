@@ -5,8 +5,6 @@ import {Link} from 'react-router-dom'
 class User extends Component {
   render() {
     const {user} = this.props
-    console.log(user)
-    console.log('USER COMPONENT:', user.id)
     return !user.deleted ? (
       <Card>
         <Card.Content>
