@@ -48,8 +48,8 @@ class Routes extends Component {
                 path="/products/admin/:productId"
                 component={ManageableProduct}
               />
-              <Route exact path="/admin" component={AdminProducts} />
-              <Route path="/admin/products" component={AdminProducts} />
+              <Route exact path="/admin" component={AdminDashboard} />
+              <Route exact path="/admin/products" component={AdminProducts} />
               <Route exact path="/admin/users" component={AdminUsers} />
               <Route
                 exact
@@ -57,6 +57,11 @@ class Routes extends Component {
                 component={ManageableUser}
               />
               <Route exact path="/orders/:userId" component={Orders} />
+              <Route
+                exact
+                path="/admin/edit-order/:userId"
+                component={Orders}
+              />
               <Route path="/admin/orders" component={AdminOrders} />
             </Switch>
           )}
