@@ -1,12 +1,14 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {me} from '../store/user'
-import {fetchOrders} from '../store/order'
+import {fetchSingleUser} from '../store/user'
+import {fetchOrders, updateOrderById} from '../store/order'
 import Order from './order'
+import {withRouter} from 'react-router-dom'
 
 class OrderHistory extends Component {
   async componentDidMount() {
-    await this.props.getUser()
+    console.log('ORDER COMPONENT:', this.props.match.params.userId)
+    await this.props.getUser(parseInt(this.props.match.params.userId, 10))
     await this.props.getOrders(this.props.user.id)
   }
 
@@ -68,13 +70,15 @@ class OrderHistory extends Component {
 }
 
 const mapStateToProps = state => ({
-  user: state.user,
+  user: state.users,
   orders: state.userOrders
 })
 
 const mapDispatchToProps = dispatch => ({
-  getUser: () => dispatch(me()),
+  getUser: id => dispatch(fetchSingleUser(id)),
   getOrders: userId => dispatch(fetchOrders(userId))
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(OrderHistory)
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(OrderHistory)
+)

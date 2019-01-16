@@ -14,6 +14,7 @@ import AdminOrders from './components/AdminOrders'
 import AdminUsers from './components/AdminUsers'
 import AdminProducts from './components/AdminProducts'
 import ManageableUser from './components/ManageableUser'
+import OrderConfirmation from './components/OrderConfirmation'
 
 /**
  * COMPONENT
@@ -35,6 +36,10 @@ class Routes extends Component {
         <Route path="/cart" component={Cart} />
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
+        <Route
+          path="/order-confirmation/:orderId"
+          component={OrderConfirmation}
+        />
         {isLoggedIn &&
           isAdmin && (
             <Switch>
@@ -44,7 +49,7 @@ class Routes extends Component {
                 component={ManageableProduct}
               />
               <Route exact path="/admin" component={AdminDashboard} />
-              <Route path="/admin/products" component={AdminProducts} />
+              <Route exact path="/admin/products" component={AdminProducts} />
               <Route exact path="/admin/users" component={AdminUsers} />
               <Route
                 exact
@@ -52,7 +57,11 @@ class Routes extends Component {
                 component={ManageableUser}
               />
               <Route exact path="/orders/:userId" component={Orders} />
-              <Route exact path="admin/orders/:userId" component={Orders} />
+              <Route
+                exact
+                path="/admin/edit-order/:userId"
+                component={Orders}
+              />
               <Route path="/admin/orders" component={AdminOrders} />
             </Switch>
           )}

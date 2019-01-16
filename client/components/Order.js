@@ -2,6 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {Button} from 'semantic-ui-react'
 import {updateOrderById} from '../store/order'
+import {me} from '../store/user'
 
 const Order = props => {
   const {
@@ -12,8 +13,10 @@ const Order = props => {
     price,
     quantity,
     status,
-    cancelOrder
+    updateOrder,
+    user
   } = props
+
   const statusStyle =
     status === 'Canceled'
       ? {display: 'inline-block', color: '#944317'}
@@ -22,7 +25,10 @@ const Order = props => {
         : status === 'Processing'
           ? {display: 'inline-block', color: '#F4A460'}
           : {display: 'inline-block', color: 'black'}
-  return (
+  const options = ['Created', 'Processing', 'Canceled', 'Completed'].map(
+    (option, i) => <option key={option + i}>{option}</option>
+  )
+  return user ? (
     <div className="single-order">
       <div>
         <h3 style={{marginBottom: '5px'}}>{orderItem}</h3>
@@ -46,16 +52,34 @@ const Order = props => {
         </div>
       </div>
       <div>
-        <Button onClick={() => cancelOrder({status: 'Canceled'}, orderId)}>
-          Cancel Item
-        </Button>
+        {user.adminAccess ? (
+          <select
+            className="select-status"
+            defaultValue={status}
+            onChange={event =>
+              updateOrder({status: event.target.value}, orderId)
+            }
+          >
+            {options}
+          </select>
+        ) : (
+          <Button onClick={() => updateOrder({status: 'Canceled'}, orderId)}>
+            Cancel Item
+          </Button>
+        )}
       </div>
     </div>
-  )
+  ) : null
 }
 
-const mapDispatchToProps = dispatch => ({
-  cancelOrder: (newOrderInfo, id) => dispatch(updateOrderById(newOrderInfo, id))
+const mapStateToProps = state => ({
+  user: state.user
 })
 
-export default connect(null, mapDispatchToProps)(Order)
+const mapDispatchToProps = dispatch => ({
+  updateOrder: (newOrderInfo, id) =>
+    dispatch(updateOrderById(newOrderInfo, id)),
+  getActiveUser: () => dispatch(me())
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Order)
