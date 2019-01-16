@@ -13,6 +13,7 @@ label {
 
 .auth-form {
   font-family: 'Karla', sans-serif;
+  width: 100%;
 }
 
 form div {
@@ -153,4 +154,14 @@ nav a {
 .select-status {
   box-shadow: 1px 1px 1px slategray;
   letter-spacing: 0.1rem;
+}
+
+.product-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+
+.product-card {
+  margin: 10px;
 }

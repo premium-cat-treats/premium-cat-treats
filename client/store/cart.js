@@ -2,6 +2,7 @@
 const ADD_TO_CART = 'ADD_TO_CART'
 const UPDATE_ITEM_QUANTITY = 'UPDATE_ITEM_QUANTITY'
 const DELETE_ITEM = 'DELETE_ITEM'
+const CLEAR_CART = 'CLEAR_CART'
 
 // ACTION CREATORS
 export const addToCart = (product, quantity) => ({
@@ -17,6 +18,10 @@ export const updateItemQuantity = (product, quantity) => ({
 export const deleteItem = productId => ({
   type: DELETE_ITEM,
   productId
+})
+
+export const clearCart = () => ({
+  type: CLEAR_CART
 })
 
 export const cartReducer = (state = [], action) => {
@@ -46,6 +51,8 @@ export const cartReducer = (state = [], action) => {
       })
     case DELETE_ITEM:
       return state.filter(item => item.product.id !== action.productId)
+    case CLEAR_CART:
+      return []
     default:
       return state
   }

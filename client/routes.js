@@ -14,6 +14,7 @@ import AdminOrders from './components/AdminOrders'
 import AdminUsers from './components/AdminUsers'
 import AdminProducts from './components/AdminProducts'
 import ManageableUser from './components/ManageableUser'
+import OrderConfirmation from './components/OrderConfirmation'
 
 /**
  * COMPONENT
@@ -35,6 +36,10 @@ class Routes extends Component {
         <Route path="/cart" component={Cart} />
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
+        <Route
+          path="/order-confirmation/:orderId"
+          component={OrderConfirmation}
+        />
         {isLoggedIn &&
           isAdmin && (
             <Switch>

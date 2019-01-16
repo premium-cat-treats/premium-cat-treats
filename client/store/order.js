@@ -2,11 +2,17 @@ import axios from 'axios'
 
 const GOT_ORDERS = 'GOT_ORDERS'
 const GOT_UPDATED_ORDER = 'GOT_UPDATED_ORDER'
+const GOT_ORDERS_FOR_CONFIRMATION = 'GOT_ORDERS_FOR_CONFIRMATION'
 
 const gotOrders = payload => ({type: GOT_ORDERS, payload})
 export const gotUpdatedOrder = updatedOrder => ({
   type: GOT_UPDATED_ORDER,
   updatedOrder
+})
+
+const gotOrdersForConfirmation = payload => ({
+  type: GOT_ORDERS_FOR_CONFIRMATION,
+  payload
 })
 
 export const fetchOrders = userId => {
@@ -35,8 +41,7 @@ export const postOrder = (totalCents, arrayOfCartItems, userId) => {
     const {data: orderTotal} = await axios.post('/api/order-total/', {
       totalCents
     })
-    console.log(orderTotal)
-    const orders = arrayOfCartItems.map(async item => {
+    const orders = await arrayOfCartItems.map(async item => {
       const itemData = {
         historicalPriceCents: item.product.priceCents,
         quantityOrdered: item.quantity,
@@ -47,6 +52,20 @@ export const postOrder = (totalCents, arrayOfCartItems, userId) => {
       const {data: orderData} = await axios.post('/api/order/', itemData)
       return orderData
     })
+    return orderTotal.id
+  }
+}
+
+export const fetchOrdersForConfirmation = orderTotalId => {
+  return async dispatch => {
+    try {
+      const {data: orders} = await axios.get(
+        `/api/orders/placed/${orderTotalId}`
+      )
+      dispatch(gotOrdersForConfirmation(orders))
+    } catch (error) {
+      console.error(error)
+    }
   }
 }
 
@@ -63,6 +82,15 @@ export const userOrders = (state = {}, action) => {
         })
       })
       return updatedState
+    default:
+      return state
+  }
+}
+
+export const singleOrderForConfirmation = (state = {}, action) => {
+  switch (action.type) {
+    case GOT_ORDERS_FOR_CONFIRMATION:
+      return action.payload
     default:
       return state
   }

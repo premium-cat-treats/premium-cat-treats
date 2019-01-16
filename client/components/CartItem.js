@@ -22,7 +22,7 @@ class CartItem extends Component {
         <Image size="tiny" src={product.imageUrl} />
         <List.Content>
           <div className="product-title">{product.title}</div>
-          || Price: ${product.priceCents / 100} || Quantity:
+          || Price: ${(product.priceCents / 100).toFixed(2)} || Quantity:
           <select
             defaultValue={quantity}
             onChange={event =>
