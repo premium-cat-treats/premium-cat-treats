@@ -16,12 +16,12 @@ install:
 before_script:
   - psql -c 'create database "premium-cat-treats-test";' -U postgres # remember to change this name if you change it elsewhere (e.g. package.json)
 
-# before_deploy:
-#   - npm run build-client # make the bundle
-#   - rm -rf node_modules # omit from the tarball, since we skip cleanup
-# deploy:
-#   skip_cleanup: true # prevents travis from deleting the build
-#   provider: heroku
-#   app: YOUR-HEROKU-APP-NAME-HERE # see README
-#   api_key:
-#     secure: YOUR-***ENCRYPTED***-API-KEY-HERE # see README
+before_deploy:
+  - npm run build-client # make the bundle
+  - rm -rf node_modules # omit from the tarball, since we skip cleanup
+deploy:
+  skip_cleanup: true # prevents travis from deleting the build
+  provider: heroku
+  app: premiumcattreats # see README
+  api_key:
+    secure: JcfdkDsgj4mRp7efES4A/NBzj0/9GmUtpA2VoN3jhz3A1JunH8KbzcYy3HC28wuyFP9cAzX0Ve63DTkvx2w8H1WOuX6GuuStoryO/U6nZ/yXoeEIGI7V+WftkVLHZEUw4I+N3j4d19gfm+aRU13Io0Tcm/7ewgKMIysks8lgIzdqurMuABfq37C5K2HA5XK2LJ/ufTNJMdvPUM/Q6LBO5nQUSLAP7SkXtlM4pBDn5Sg8pPJXKLhdOyNEjdW/0Oa9783PhLfXsbLV9Drcigj8apTNi4ozDwf5Y33hwF1gZLI7gkfE8oYSr7EIV2BSbqboB4UdYpqOBc2N3EmBhuPR03c1icOqEJD1yqoE9hWRty6dm7q3RJO7P/n41c99QmYJyML6SbMg3DN2EC4YwsGzwQOlu6uv5RM6VU34CeLYPL7qP6eNmNJ+ePzvfS3+Q6Qbu5E/MsmE3YZhsk67D4/WOFGLFgTedo+74aBAE3+cXXipuEFqxUfhPNAnn5iFWfhf4cb6bUXLHDCE7VFZa8MGRgoPoJXbdNJQ/4Apvm2IV1gzqoZhiKRB+U4w2subr1/s/VtMoYYimNRn+DZnpbkfYBcAqSuwtZU2Tp6mcHhH4aphT3WumVOjzoDYHGYnvm1qaXAsTF6PTpuCmAz35SKyNl2T7sgthG4nsF41cUwAW3k=
