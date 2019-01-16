@@ -87,7 +87,7 @@ const mapState = state => {
   return {
     isLoggedIn: !!state.user.id,
     user: state.user,
-    isAdmin: state.user.adminAccess
+    isAdmin: state.user.adminAccess || false
   }
 }
 
