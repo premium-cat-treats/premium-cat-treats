@@ -2,15 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
 import {auth} from '../store'
-import {
-  Button,
-  Form,
-  Grid,
-  Header,
-  Image,
-  Message,
-  Segment
-} from 'semantic-ui-react'
+import {Button, Form, Header, Image, Message} from 'semantic-ui-react'
 import {Link} from 'react-router-dom'
 
 /**
@@ -22,63 +14,74 @@ const AuthForm = props => {
   return (
     //TODO: Add header with title and short description; fix login box
 
-    <div className="auth-form">
-      <style>{`
-      body > div,
-      body > div > div,
-      body > div > div > div.login-form {
-        height: 100%;
-      }
-    `}</style>
-      <Grid textAlign="center" style={{height: '100%'}}>
-        <Grid.Column style={{maxWidth: 450}}>
-          <Header as="h1" color="teal" textAlign="center">
-            Welcome to Premium Cat Treats{' '}
-            <p>
-              <h4>
-                <i>
-                  Where our purrrfect gourmet selections make your feline's
-                  wildest dreams come true.
-                </i>
-              </h4>
-            </p>
-            <br />
-            <br />
-            <br />
-            <Image src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/48/Cat_illustration.jpg/120px-Cat_illustration.jpg" />{' '}
-            Log-in to your account
-          </Header>
-          <Form onSubmit={handleSubmit} name={name} size="large">
-            <Segment stacked>
-              <Form.Input
-                fluid
-                icon="user"
-                iconPosition="left"
-                placeholder="E-mail address"
-                name="email"
-                type="text"
-              />
-              <Form.Input
-                fluid
-                icon="lock"
-                iconPosition="left"
-                placeholder="Password"
-                type="password"
-                name="password"
-              />
+    <div className="log-in-form">
+      <Header
+        as="h1"
+        color="teal"
+        textAlign="center"
+        style={{marginBottom: '0px'}}
+      >
+        Welcome to Premium Cat Treats{' '}
+        <p>
+          <h4>
+            <Image
+              src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/48/Cat_illustration.jpg/120px-Cat_illustration.jpg"
+              style={{display: 'inline-block', marginLeft: '-100px'}}
+            />{' '}
+            <i>
+              Where our purrrfect gourmet selections make your feline's wildest
+              dreams come true.
+            </i>
+          </h4>
+        </p>
+      </Header>
+      <div>
+        <Form
+          onSubmit={handleSubmit}
+          name={name}
+          className="log-form-container"
+        >
+          <Form.Input
+            className="log-in-form-input"
+            fluid
+            icon="user"
+            iconPosition="left"
+            placeholder="E-mail address"
+            name="email"
+            type="text"
+          />
+          <Form.Input
+            className="log-in-form-input"
+            fluid
+            icon="lock"
+            iconPosition="left"
+            placeholder="Password"
+            type="password"
+            name="password"
+            style={{marginBottom: '20px'}}
+          />
 
-              <Button type="submit" color="teal" fluid size="large">
-                {displayName}
-              </Button>
-            </Segment>
-            {error && error.response && <div> {error.response.data} </div>}
-          </Form>
-          <a href="/auth/google">{displayName} with Google</a>
-          <Message>
-            New to us? <Link to="/signup">Sign Up</Link>
+          <Button
+            type="submit"
+            color="teal"
+            fluid
+            style={{margin: '0 0 20px 15px', width: '50%'}}
+          >
+            {displayName}
+          </Button>
+          <a href="/auth/google" style={{width: '50%'}}>
+            {displayName} with Google
+          </a>
+          <br />
+          <Message style={{margin: '0 0 20px 15px', width: '50%'}}>
+            New to us?{' '}
+            <Link to="/signup" style={{marginLeft: '5px'}}>
+              Sign Up
+            </Link>
           </Message>
-        </Grid.Column>
-      </Grid>
+          {error && error.response && <div> {error.response.data} </div>}
+        </Form>
+      </div>
     </div>
   )
 }

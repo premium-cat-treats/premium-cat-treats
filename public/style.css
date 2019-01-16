@@ -11,11 +11,6 @@ label {
   display: block;
 }
 
-.auth-form {
-  font-family: 'Karla', sans-serif;
-  width: 100%;
-}
-
 form div {
   margin: 1em;
   display: inline-block;
@@ -164,4 +159,25 @@ nav a {
 
 .product-card {
   margin: 10px;
+}
+
+.log-in-form {
+  margin: 0 auto;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.log-in-form-input {
+  position: relative;
+  width: 60%;
+}
+
+.log-form-container {
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
 }
