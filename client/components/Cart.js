@@ -13,8 +13,6 @@ import {postOrder} from '../store/order'
 class Cart extends Component {
   render() {
     const {cart} = this.props
-    console.log('props: ', this.props)
-
     return (
       <div>
         <h1>Cart</h1>
