@@ -1,18 +1,15 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {me} from '../store/user'
+import {fetchSingleUser} from '../store/user'
 import {fetchOrders, updateOrderById} from '../store/order'
 import Order from './order'
+import {withRouter} from 'react-router-dom'
 
 class OrderHistory extends Component {
   async componentDidMount() {
-    await this.props.getUser()
-    await this.props.getOrders(this.props.match.params.userId)
-  }
-
-  handleStatusChange = (event, orderId) => {
-    const newOrderStatus = event.target.value
-    this.props.updateOrder({status: newOrderStatus}, orderId)
+    console.log('ORDER COMPONENT:', this.props.match.params.userId)
+    await this.props.getUser(parseInt(this.props.match.params.userId, 10))
+    await this.props.getOrders(this.props.user.id)
   }
 
   render() {
@@ -46,8 +43,6 @@ class OrderHistory extends Component {
             {ords[key].map(singleOrder => {
               return (
                 <Order
-                  handleStatusChange={this.handleStatusChange}
-                  user={this.props.user}
                   key={singleOrder.id}
                   orderId={singleOrder.id}
                   orderItem={singleOrder.product.title}
@@ -75,14 +70,15 @@ class OrderHistory extends Component {
 }
 
 const mapStateToProps = state => ({
-  user: state.user,
+  user: state.users,
   orders: state.userOrders
 })
 
 const mapDispatchToProps = dispatch => ({
-  getUser: () => dispatch(me()),
-  getOrders: userId => dispatch(fetchOrders(userId)),
-  updateOrder: (newOrderInfo, id) => dispatch(updateOrderById(newOrderInfo, id))
+  getUser: id => dispatch(fetchSingleUser(id)),
+  getOrders: userId => dispatch(fetchOrders(userId))
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(OrderHistory)
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(OrderHistory)
+)

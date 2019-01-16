@@ -149,3 +149,8 @@ nav a {
   padding: 16px;
   transition: all 0.3s ease-out;
 }
+
+.select-status {
+  box-shadow: 1px 1px 1px slategray;
+  letter-spacing: 0.1rem;
+}

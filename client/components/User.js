@@ -6,6 +6,7 @@ class User extends Component {
   render() {
     const {user} = this.props
     console.log(user)
+    console.log('USER COMPONENT:', user.id)
     return !user.deleted ? (
       <Card>
         <Card.Content>
@@ -22,10 +23,11 @@ class User extends Component {
           <Card.Description>{user.email}</Card.Description>
         </Card.Content>
         <Card.Content extra>
-          <Link to={`/admin/users/${user.id}`}>
+          <Link style={{marginBottom: '5px'}} to={`/admin/users/${user.id}`}>
             <Icon name="edit" /> Edit this User
           </Link>
-          <Link to={`admin/orders/${user.Id}`}>User Order History</Link>
+          <br />
+          <Link to={`/admin/edit-order/${user.id}`}>User Order History</Link>
         </Card.Content>
       </Card>
     ) : null

@@ -2,6 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {Button, Dropdown} from 'semantic-ui-react'
 import {updateOrderById} from '../store/order'
+import {me} from '../store/user'
 
 const Order = props => {
   const {
@@ -12,14 +13,14 @@ const Order = props => {
     price,
     quantity,
     status,
-    cancelOrder,
+    updateOrder,
     user
   } = props
 
   const statusOptions = [
     {key: 'Cr', value: 'Created', text: 'Created'},
-    {key: 'Pr', value: 'Processing', text: 'Pr'},
-    {key: 'Ca', value: 'Canceled', text: 'Ca'},
+    {key: 'Pr', value: 'Processing', text: 'Processing'},
+    {key: 'Ca', value: 'Canceled', text: 'Canceled'},
     {key: 'Co', value: 'Completed', text: 'Completed'}
   ]
   const statusStyle =
@@ -30,7 +31,10 @@ const Order = props => {
         : status === 'Processing'
           ? {display: 'inline-block', color: '#F4A460'}
           : {display: 'inline-block', color: 'black'}
-  return (
+  const options = ['Created', 'Processing', 'Canceled', 'Completed'].map(
+    (option, i) => <option key={option + i}>{option}</option>
+  )
+  return user ? (
     <div className="single-order">
       <div>
         <h3 style={{marginBottom: '5px'}}>{orderItem}</h3>
@@ -54,26 +58,34 @@ const Order = props => {
         </div>
       </div>
       <div>
-        {user.adminAcess ? (
-          <Dropdown
-            onChange={() => props.handleStatusChange(event, orderId)}
-            placeholder="Order Status"
-            search
-            selection
-            options={statusOptions}
-          />
+        {user.adminAccess ? (
+          <select
+            className="select-status"
+            defaultValue={status}
+            onChange={event =>
+              updateOrder({status: event.target.value}, orderId)
+            }
+          >
+            {options}
+          </select>
         ) : (
-          <Button onClick={() => cancelOrder({status: 'Canceled'}, orderId)}>
+          <Button onClick={() => updateOrder({status: 'Canceled'}, orderId)}>
             Cancel Item
           </Button>
         )}
       </div>
     </div>
-  )
+  ) : null
 }
 
-const mapDispatchToProps = dispatch => ({
-  cancelOrder: (newOrderInfo, id) => dispatch(updateOrderById(newOrderInfo, id))
+const mapStateToProps = state => ({
+  user: state.user
 })
 
-export default connect(null, mapDispatchToProps)(Order)
+const mapDispatchToProps = dispatch => ({
+  updateOrder: (newOrderInfo, id) =>
+    dispatch(updateOrderById(newOrderInfo, id)),
+  getActiveUser: () => dispatch(me())
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Order)

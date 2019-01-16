@@ -46,6 +46,7 @@ export const fetchUsers = () => {
 export const fetchSingleUser = userId => {
   return async dispatch => {
     try {
+      console.log('USER REDUCER:', userId)
       const {data: user} = await axios.get(`/api/users/${userId}`)
       dispatch(gotUserInfo(user))
     } catch (error) {
