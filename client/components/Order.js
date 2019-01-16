@@ -1,6 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {Button, Dropdown} from 'semantic-ui-react'
+import {Button} from 'semantic-ui-react'
 import {updateOrderById} from '../store/order'
 import {me} from '../store/user'
 
@@ -17,12 +17,6 @@ const Order = props => {
     user
   } = props
 
-  const statusOptions = [
-    {key: 'Cr', value: 'Created', text: 'Created'},
-    {key: 'Pr', value: 'Processing', text: 'Processing'},
-    {key: 'Ca', value: 'Canceled', text: 'Canceled'},
-    {key: 'Co', value: 'Completed', text: 'Completed'}
-  ]
   const statusStyle =
     status === 'Canceled'
       ? {display: 'inline-block', color: '#944317'}
