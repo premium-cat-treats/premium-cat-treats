@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import {Segment, Form, Button} from 'semantic-ui-react'
 import {postNewProduct} from '../store/product'
 import {connect} from 'react-redux'
+import UpdateProductMessage from './UpdateProductMessage'
 
 class AddProductForm extends Component {
   constructor(props) {
@@ -11,8 +12,14 @@ class AddProductForm extends Component {
       description: '',
       priceCents: '',
       quantity: '',
-      imageUrl: ''
+      imageUrl: '',
+      messageIsShowing: false,
+      message: ''
     }
+  }
+
+  toggleMessageOff = () => {
+    this.setState({messageIsShowing: false})
   }
 
   onFormSubmit = evt => {
@@ -26,6 +33,10 @@ class AddProductForm extends Component {
         imageUrl: this.state.imageUrl
       }
       this.props.postNewProduct(newProduct)
+      this.setState({
+        messageIsShowing: true,
+        message: 'Product successfully created'
+      })
       this.props.history.push('/products')
     }
   }
@@ -40,6 +51,11 @@ class AddProductForm extends Component {
     const {title, description, priceCents, quantity, imageUrl} = this.state
     return (
       <div>
+        <UpdateProductMessage
+          show={this.state.messageIsShowing}
+          userMessage={this.state.message}
+          messageToggle={this.toggleMessageOff}
+        />
         <Segment>
           <Form onSubmit={this.onFormSubmit}>
             <h3>Add New Product</h3>
