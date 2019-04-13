@@ -45,7 +45,7 @@ describe('CartItem', () => {
   })
 
   it('renders the correct product title for the cart item', () => {
-    expect(cartItemTester.find(`.product-title div`).text()).to.be.equal(
+    expect(cartItemTester.find('.product-title').text()).to.be.equal(
       cartItem.product.title
     )
   })
