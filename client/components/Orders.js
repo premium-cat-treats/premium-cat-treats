@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {fetchSingleUser} from '../store/user'
 import {fetchOrders, updateOrderById} from '../store/order'
-import Order from './order'
+import Order from './Order'
 import {withRouter} from 'react-router-dom'
 
 class OrderHistory extends Component {
